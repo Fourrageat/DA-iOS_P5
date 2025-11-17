@@ -12,7 +12,6 @@ struct TransactionDetailsView: View {
         VStack {
             Text("Hello, World!")
         }
-        .toolbar(.hidden, for: .tabBar)
     }
 }
 

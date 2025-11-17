@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AccountDetailView: View {
     @ObservedObject var viewModel: AccountDetailViewModel
+    @State private var hideTabBar = false
     
     var body: some View {
         NavigationStack {
@@ -52,7 +53,13 @@ struct AccountDetailView: View {
                 
                 // Button to see details of transactions
                 NavigationLink {
-                    TransactionDetailsView() // ou autre vue
+                    TransactionDetailsView()
+                        .onAppear {
+                            withAnimation(.smooth) { hideTabBar = true }
+                        }
+                        .onDisappear {
+                            withAnimation(.smooth) { hideTabBar = false }
+                        }
                 } label: {
                     HStack {
                         Image(systemName: "list.bullet")
@@ -70,6 +77,7 @@ struct AccountDetailView: View {
             .onTapGesture {
                 self.endEditing(true)  // This will dismiss the keyboard when tapping outside
             }
+            .toolbar(hideTabBar ? .hidden : .visible, for: .tabBar)
         }
     }
 }

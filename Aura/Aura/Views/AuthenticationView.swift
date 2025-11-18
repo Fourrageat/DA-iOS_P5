@@ -78,12 +78,13 @@ struct AuthenticationView: View {
                     Task { await viewModel.login() }
                 }) {
                     Text("Se connecter")
-                        .foregroundColor(.white)
+                        .foregroundColor((isEmailValid && !viewModel.password.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty) ? Color.white : Color.white.opacity(0.4))
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .background(Color.black) // You can also change this to your pastel green color
+                        .background((isEmailValid && !viewModel.password.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty) ? Color.black : Color.black.opacity(0.4))
                         .cornerRadius(8)
                 }
+                .disabled(!(isEmailValid && !viewModel.password.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty))
             }
             .padding(.horizontal, 40)
         }

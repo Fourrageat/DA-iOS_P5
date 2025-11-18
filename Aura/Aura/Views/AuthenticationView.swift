@@ -11,11 +11,19 @@ struct AuthenticationView: View {
     
     @State private var username: String = ""
     @State private var password: String = ""
+    @State private var emailTouched: Bool = false
     
     let gradientStart = Color(hex: "#94A684").opacity(0.7)
     let gradientEnd = Color(hex: "#94A684").opacity(0.0) // Fades to transparent
 
     @ObservedObject var viewModel: AuthenticationViewModel
+    
+    private var isEmailValid: Bool {
+        // Simple regex for email validation
+        let email = viewModel.username.trimmingCharacters(in: .whitespacesAndNewlines)
+        let pattern = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}$"
+        return NSPredicate(format: "SELF MATCHES[c] %@", pattern).evaluate(with: email)
+    }
 
     
     var body: some View {
@@ -35,13 +43,30 @@ struct AuthenticationView: View {
                     .font(.largeTitle)
                     .fontWeight(.semibold)
                 
-                TextField("Adresse email", text: $viewModel.username)
+                TextField("Adresse email", text: $viewModel.username, onEditingChanged: { isEditing in
+                    if isEditing {
+                        emailTouched = true
+                    }
+                })
                     .padding()
                     .background(Color(UIColor.secondarySystemBackground))
                     .cornerRadius(8)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(emailTouched && !isEmailValid ? Color.red : Color.clear, lineWidth: 2)
+                    )
                     .autocapitalization(.none)
                     .keyboardType(.emailAddress)
                     .disableAutocorrection(true)
+                    .textContentType(.emailAddress)
+
+                if emailTouched && !isEmailValid {
+                    Text("Veuillez saisir une adresse email valide")
+                        .font(.footnote)
+                        .foregroundColor(.red)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.top, -15)
+                }
                 
                 SecureField("Mot de passe", text: $viewModel.password)
                     .padding()

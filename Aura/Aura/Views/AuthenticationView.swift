@@ -78,11 +78,7 @@ struct AuthenticationView: View {
                     Task { await viewModel.login() }
                 }) {
                     Text("Se connecter")
-                        .foregroundColor((isEmailValid && !viewModel.password.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty) ? Color.white : Color.white.opacity(0.4))
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background((isEmailValid && !viewModel.password.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty) ? Color.black : Color.black.opacity(0.4))
-                        .cornerRadius(8)
+                        .primaryButtonStyle(isEnabled: (isEmailValid && !viewModel.password.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty))
                 }
                 .disabled(!(isEmailValid && !viewModel.password.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty))
             }
@@ -93,6 +89,25 @@ struct AuthenticationView: View {
         }
     }
     
+}
+
+private struct PrimaryButtonStyle: ViewModifier {
+    let isEnabled: Bool
+
+    func body(content: Content) -> some View {
+        content
+            .foregroundColor(isEnabled ? Color.white : Color.white.opacity(0.4))
+            .frame(maxWidth: .infinity)
+            .padding()
+            .background(isEnabled ? Color.black : Color.black.opacity(0.4))
+            .cornerRadius(8)
+    }
+}
+
+private extension View {
+    func primaryButtonStyle(isEnabled: Bool) -> some View {
+        self.modifier(PrimaryButtonStyle(isEnabled: isEnabled))
+    }
 }
 
 #Preview {

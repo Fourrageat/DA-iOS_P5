@@ -64,10 +64,12 @@ private struct CustomAlertPopup: ViewModifier {
                     .cornerRadius(40)
                     .padding(.horizontal, 20)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                    .transition(.asymmetric(insertion: .move(edge: .top), removal: .move(edge: .bottom)))
                     .ignoresSafeArea()
                 }
             }
         )
+        .animation(.spring(response: 0.5, dampingFraction: 0.8, blendDuration: 0.2), value: show)
     }
 }
 
@@ -92,4 +94,3 @@ extension View {
 
     return ErrorPopupPreviewHost()
 }
-

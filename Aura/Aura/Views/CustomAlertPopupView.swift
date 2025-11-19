@@ -11,65 +11,81 @@ private struct CustomAlertPopup: ViewModifier {
     @Binding var show: Bool
 
     func body(content: Content) -> some View {
-        content.overlay(
-            ZStack {
-                if show {
-                    // Tap outside to dismiss
-                    Color.clear
-                        .ignoresSafeArea()
-                        .contentShape(Rectangle())
-                        .onTapGesture { show = false }
+        content
+            .overlay(
+                ZStack {
+                    if show {
+                        // Backdrop: dim + blur, tap outside to dismiss
+                        Color.black.opacity(0.35)
+                            .ignoresSafeArea()
+                            .transition(.opacity)
+                            .accessibilityHidden(true)
 
-                    // Popup content
-                    ZStack {
-                        VStack {
-                            Image(systemName: "lock.badge.xmark")
-                                .foregroundColor(Color.white)
-                                .frame(width: 50, height: 50)
-                                .font(Font.system(size: 50, weight: .bold, design: .default))
-                                .padding(.bottom, 20)
-                                
-                            HStack {
+                        // Popup card
+                        ZStack {
+                            VStack(spacing: 16) {
+                                // Icon badge
+                                ZStack {
+                                    Circle()
+                                        .fill(.thinMaterial)
+                                        .frame(width: 72, height: 72)
+                                        .overlay(
+                                            Circle()
+                                                .strokeBorder(Color.white.opacity(0.2), lineWidth: 1)
+                                        )
+                                        .shadow(color: Color.black.opacity(0.15), radius: 10, x: 0, y: 6)
+
+                                    Image(systemName: "lock.badge.xmark")
+                                        .foregroundStyle(.primary)
+                                        .font(.system(size: 34, weight: .semibold))
+                                        .accessibilityHidden(true)
+                                }
+                                .padding(.top, 8)
+
+                                // Title / message
                                 Text("Email ou mot de passe incorrect")
                                     .multilineTextAlignment(.center)
-                                    .foregroundColor(Color.white)
-                                    .font(Font.system(size: 17, weight: .bold, design: .default))
-                            }
-                            .padding(.horizontal, 35)
+                                    .font(.system(.headline, design: .rounded))
+                                    .foregroundStyle(.primary)
+                                    .padding(.horizontal, 24)
 
-                            HStack {
-                                Button(action: {
-                                    show = false
-                                }, label: {
+                                // Action
+                                Button(action: { show = false }) {
                                     Text("OK")
-                                        .foregroundColor(Color.gray)
-                                        .padding(.top, 15)
-                                        .padding(.bottom, 15)
-                                        .padding(.trailing, 55)
-                                        .padding(.leading, 55)
-                                        .background(Color.black.opacity(0.8))
-                                        .font(Font.system(size: 20, weight: .bold, design: .default))
-                                        .cornerRadius(30)
-                                })
+                                        .frame(maxWidth: .infinity)
+                                }
+                                .buttonStyle(.borderedProminent)
+                                .tint(Color(hex: "#94A684"))
+                                .controlSize(.large)
+                                .padding(.horizontal, 24)
+                                .padding(.bottom, 8)
                             }
-                            .padding(.bottom, 0)
-                            .padding(.horizontal, 50)
-                            .padding(.top, 15)
-                            
                         }
+                        .frame(maxWidth: 360)
+                        .padding(.horizontal, 24)
+                        .padding(.vertical, 20)
+                        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 24, style: .continuous))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 24, style: .continuous)
+                                .stroke(Color.white.opacity(0.15), lineWidth: 1)
+                        )
+                        .shadow(color: Color.black.opacity(0.25), radius: 24, x: 0, y: 12)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                        .transition(
+                            .asymmetric(
+                                insertion: .move(edge: .top).combined(with: .opacity),
+                                removal: .move(edge: .bottom).combined(with: .opacity)
+                            )
+                        )
+                        .sensoryFeedback(.impact(weight: .medium, intensity: 0.9), trigger: show)
+                        .accessibilityElement(children: .contain)
+                        .accessibilityAddTraits(.isModal)
+                        
+                        .padding(.horizontal, 15)
                     }
-                    .frame(height: 250)
-                    .frame(maxWidth: .infinity)
-                    .background(Color(hex: "#94A684"))
-                    .cornerRadius(40)
-                    .padding(.horizontal, 20)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-                    .transition(.asymmetric(insertion: .move(edge: .top), removal: .move(edge: .bottom)))
-                    .ignoresSafeArea()
                 }
-            }
-        )
-        .animation(.spring(response: 0.5, dampingFraction: 0.8, blendDuration: 0.2), value: show)
+            )
+            .animation(.spring(response: 0.4, dampingFraction: 0.7, blendDuration: 0.2), value: show)
     }
 }
 
@@ -94,3 +110,4 @@ extension View {
 
     return ErrorPopupPreviewHost()
 }
+

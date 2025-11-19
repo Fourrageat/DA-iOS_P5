@@ -84,14 +84,9 @@ struct AuthenticationView: View {
             }
             .padding(.horizontal, 40)
         }
+        .customAlertPopup(show: $viewModel.showErrorAlert)
         .onTapGesture {
             self.endEditing(true)  // This will dismiss the keyboard when tapping outside
-        }
-        .alert("Erreur de connexion", isPresented: $viewModel.showErrorAlert) {
-            Button("OK", role: .cancel) { }
-        } message: {
-            Text("Identifiants incorrects. Veuillez réessayer.")
-                
         }
     }
     
@@ -121,4 +116,3 @@ private extension View {
         
     }))
 }
-

@@ -9,7 +9,7 @@ import Foundation
 
 class AuthenticationViewModel: ObservableObject {
     @Published var showErrorAlert: Bool = false
-    @Published var errorMessage: String? = nil
+    @Published var errorMessage: String = "Unknown error"
     @Published var username: String = ""
     @Published var password: String = ""
     
@@ -31,6 +31,8 @@ class AuthenticationViewModel: ObservableObject {
             print(response)
         } catch {
             await MainActor.run {
+                username = ""
+                password = ""
                 self.errorMessage = "Identifiants incorrects. Veuillez réessayer."
                 self.showErrorAlert = true
             }

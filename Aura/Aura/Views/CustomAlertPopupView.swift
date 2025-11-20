@@ -9,6 +9,7 @@ import SwiftUI
 
 private struct CustomAlertPopup: ViewModifier {
     @Binding var show: Bool
+    @Binding var errorMessage: String
 
     func body(content: Content) -> some View {
         content
@@ -43,7 +44,7 @@ private struct CustomAlertPopup: ViewModifier {
                                 .padding(.top, 8)
 
                                 // Title / message
-                                Text("Email ou mot de passe incorrect")
+                                Text(errorMessage)
                                     .multilineTextAlignment(.center)
                                     .font(.system(.headline, design: .rounded))
                                     .foregroundStyle(.primary)
@@ -90,14 +91,15 @@ private struct CustomAlertPopup: ViewModifier {
 }
 
 extension View {
-    func customAlertPopup(show: Binding<Bool>) -> some View {
-        modifier(CustomAlertPopup(show: show))
+    func customAlertPopup(show: Binding<Bool>, errorMessage: Binding<String>) -> some View {
+        modifier(CustomAlertPopup(show: show, errorMessage: errorMessage))
     }
 }
 
 #Preview {
     struct ErrorPopupPreviewHost: View {
         @State private var show = true
+        @State private var errorMessage: String = "Error Message"
         let gradientStart = Color(hex: "#94A684").opacity(0.7)
         let gradientEnd = Color(hex: "#94A684").opacity(0.0) // Fades to transparent
         
@@ -106,7 +108,7 @@ extension View {
                 LinearGradient(gradient: Gradient(colors: [gradientStart, gradientEnd]), startPoint: .top, endPoint: .bottomLeading)
                     .edgesIgnoringSafeArea(.all)
             }
-            .customAlertPopup(show: $show)
+            .customAlertPopup(show: $show, errorMessage: $errorMessage)
         }
     }
 

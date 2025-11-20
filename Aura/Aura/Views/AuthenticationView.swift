@@ -85,7 +85,7 @@ struct AuthenticationView: View {
             }
             .padding(.horizontal, 40)
         }
-        .customAlertPopup(show: $viewModel.showErrorAlert)
+        .customAlertPopup(show: $viewModel.showErrorAlert, errorMessage: $viewModel.errorMessage)
         .onTapGesture {
             self.endEditing(true)  // This will dismiss the keyboard when tapping outside
         }

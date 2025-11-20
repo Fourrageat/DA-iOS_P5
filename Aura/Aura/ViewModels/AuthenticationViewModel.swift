@@ -8,6 +8,8 @@
 import Foundation
 
 class AuthenticationViewModel: ObservableObject {
+    @Published var showErrorAlert: Bool = false
+    @Published var errorMessage: String? = nil
     @Published var username: String = ""
     @Published var password: String = ""
     
@@ -19,16 +21,21 @@ class AuthenticationViewModel: ObservableObject {
     
     func login() async {
         print("login with \(username) and \(password)")
-        let service = AuthenticationService()
+        let service: AuthenticationServicing = AuthenticationService()
         do {
             let response = try await service.authenticate(username: username, password: password)
             // Handle successful authentication, e.g., trigger callback
             onLoginSucceed()
             // You can also use `response` if needed
             _ = response
+            print(response)
         } catch {
-            // Handle authentication error (log or surface to UI)
+            await MainActor.run {
+                self.errorMessage = "Identifiants incorrects. Veuillez réessayer."
+                self.showErrorAlert = true
+            }
             print("Authentication failed with error: \(error)")
         }
     }
 }
+

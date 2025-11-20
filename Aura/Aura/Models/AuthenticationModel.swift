@@ -53,7 +53,6 @@ struct AuthenticationService: AuthenticationServicing {
 
         let decoded = try JSONDecoder().decode(AuthResponse.self, from: data)
         let token = decoded.token
-        print(token)
         return token
     }
 }

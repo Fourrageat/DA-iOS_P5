@@ -57,7 +57,8 @@ struct AuthenticationView: View {
                     .autocapitalization(.none)
                     .keyboardType(.emailAddress)
                     .disableAutocorrection(true)
-                    .textContentType(.emailAddress)
+                    .textContentType(.username)
+                    .textInputAutocapitalization(.never)
 
                 if emailTouched && !isEmailValid {
                     Text("Veuillez saisir une adresse email valide")
@@ -71,6 +72,7 @@ struct AuthenticationView: View {
                     .padding()
                     .background(Color(UIColor.secondarySystemBackground))
                     .cornerRadius(8)
+                    .textContentType(.password)
                 
                 Button(action: {
                     // Handle authentication logic here

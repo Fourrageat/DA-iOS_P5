@@ -31,12 +31,22 @@ class AuthenticationViewModel: ObservableObject {
             _ = response
             print(response)
         } catch {
-            await MainActor.run {
-                username = ""
-                password = ""
-                self.errorMessage = "Identifiants incorrects. Veuillez réessayer."
-                self.errorIcon = "lock.badge.xmark"
-                self.showErrorAlert = true
+            if let nsError = error as NSError?, nsError.code == 400 {
+                await MainActor.run {
+                    username = ""
+                    password = ""
+                    self.errorMessage = "Identifiants incorrects. Veuillez réessayer."
+                    self.errorIcon = "nosign"
+                    self.showErrorAlert = true
+                }
+            } else {
+                await MainActor.run {
+                    username = ""
+                    password = ""
+                    self.errorMessage = errorMessage
+                    self.errorIcon = errorIcon
+                    self.showErrorAlert = true
+                }
             }
             print("Authentication failed with error: \(error)")
         }

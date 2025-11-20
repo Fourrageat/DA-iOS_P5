@@ -96,10 +96,12 @@ extension View {
         show: Binding<Bool>,
         errorMessage: Binding<String>,
         errorIcon: Binding<String>) -> some View {
-        modifier(CustomAlertPopup(show: show,
-                                  errorMessage: errorMessage,
-                                  errorIcon: errorIcon
-                                 ))
+        modifier(CustomAlertPopup(
+            show: show,
+            errorMessage: errorMessage,
+            errorIcon: errorIcon
+            )
+        )
     }
 }
 

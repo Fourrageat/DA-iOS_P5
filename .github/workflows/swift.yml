@@ -4,7 +4,6 @@ on:
   pull_request:
     types: [opened, synchronize, reopened, ready_for_review]
     paths:
-      - 'Aura/**'
       - '.github/workflows/swift.yml'
 
 jobs:

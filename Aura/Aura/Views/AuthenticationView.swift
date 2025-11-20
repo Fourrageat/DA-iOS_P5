@@ -25,7 +25,6 @@ struct AuthenticationView: View {
         return NSPredicate(format: "SELF MATCHES[c] %@", pattern).evaluate(with: email)
     }
 
-    
     var body: some View {
         
         ZStack {

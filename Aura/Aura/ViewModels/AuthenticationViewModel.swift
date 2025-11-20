@@ -10,6 +10,7 @@ import Foundation
 class AuthenticationViewModel: ObservableObject {
     @Published var showErrorAlert: Bool = false
     @Published var errorMessage: String = "Unknown error"
+    @Published var errorIcon: String = "exclamationmark.circle"
     @Published var username: String = ""
     @Published var password: String = ""
     
@@ -34,6 +35,7 @@ class AuthenticationViewModel: ObservableObject {
                 username = ""
                 password = ""
                 self.errorMessage = "Identifiants incorrects. Veuillez réessayer."
+                self.errorIcon = "lock.badge.xmark"
                 self.showErrorAlert = true
             }
             print("Authentication failed with error: \(error)")

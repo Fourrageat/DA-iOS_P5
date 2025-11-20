@@ -98,11 +98,13 @@ extension View {
 #Preview {
     struct ErrorPopupPreviewHost: View {
         @State private var show = true
+        let gradientStart = Color(hex: "#94A684").opacity(0.7)
+        let gradientEnd = Color(hex: "#94A684").opacity(0.0) // Fades to transparent
+        
         var body: some View {
             ZStack {
-                Color.black.ignoresSafeArea()
-                    .foregroundColor(.white)
-                Spacer()
+                LinearGradient(gradient: Gradient(colors: [gradientStart, gradientEnd]), startPoint: .top, endPoint: .bottomLeading)
+                    .edgesIgnoringSafeArea(.all)
             }
             .customAlertPopup(show: $show)
         }
@@ -110,4 +112,3 @@ extension View {
 
     return ErrorPopupPreviewHost()
 }
-

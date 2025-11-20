@@ -8,7 +8,7 @@ on:
     types: [opened, synchronize, reopened, ready_for_review]
     paths:
       - 'Aura/**'
-      - '.github/workflows/ci-aura.yml'
+      - '.github/workflows/swift.yml'
   workflow_dispatch:
 
 jobs:

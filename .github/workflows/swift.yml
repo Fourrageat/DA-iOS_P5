@@ -1,24 +1,12 @@
-Ignorer et passer au contenu
-Historique de chat
-
-Vous avez dit :
-Image chargée
-j'ai ça, et j'aimerais lancer une ci avec guithub action pour tester ce qui se trouve dans le dossier aura
-ChatGPT a dit :
-Tu es déjà bien parti 👍
-L’idée : dans ton repo racine, tu gardes .github/workflows/swift.yml, mais tu dis à GitHub Actions d’aller dans le dossier Aura pour lancer les tests.
-Voici un exemple complet de swift.yml que tu peux mettre dans .github/workflows/ :
 
 name: iOS CI (Aura)
 
 on:
-  push:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
     paths:
       - 'Aura/**'
       - '.github/workflows/swift.yml'
-  pull_request:
-    paths:
-      - 'Aura/**'
 
 jobs:
   tests:

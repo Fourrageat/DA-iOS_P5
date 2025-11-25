@@ -46,20 +46,13 @@ struct AuthenticationService: AuthenticationServicing {
             throw URLError(.badServerResponse)
         }
         
-        print(http.statusCode)
-        
-        if http.statusCode == 403 {
-            // Par exemple, une erreur spécifique à l’authentification
-            throw NSError(
-                domain: "AuthenticationService",
-                code: 400,
-                userInfo: [NSLocalizedDescriptionKey: "Bad Request (400)."]
-            )
-        }
-
         guard (200..<300).contains(http.statusCode) else {
             let serverMessage = String(data: data, encoding: .utf8) ?? "Unknown error"
-            throw NSError(domain: "AuthenticationService", code: http.statusCode, userInfo: [NSLocalizedDescriptionKey: serverMessage])
+            throw NSError(
+                domain: "AuthenticationService",
+                code: http.statusCode,
+                userInfo: [NSLocalizedDescriptionKey: serverMessage]
+            )
         }
 
         let decoded = try JSONDecoder().decode(AuthResponse.self, from: data)

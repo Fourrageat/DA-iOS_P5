@@ -8,7 +8,7 @@
 import Foundation
 
 class AccountDetailViewModel: ObservableObject {
-    @Published var totalAmount: String = "Loading..."
+    @Published var totalAmount: String = "..."
     @Published var recentTransactions: [Transaction] = []
     
     struct Transaction {
@@ -22,7 +22,7 @@ class AccountDetailViewModel: ObservableObject {
         do {
             guard let token = try? Keychain.get("auth_token") else {
                 await MainActor.run { [weak self] in
-                    self?.totalAmount = "—"
+                    self?.totalAmount = "..."
                     self?.recentTransactions = []
                 }
                 return

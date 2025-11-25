@@ -7,28 +7,28 @@
 
 import Foundation
 
-// MARK: - Data Models
+// MARK: - DTOs
 
 /// Represents a banking transaction.
-public struct Transaction: Codable {
+struct Transaction: Codable {
     /// Monetary amount of the transaction.
-    public let value: Decimal
+    let value: Decimal
     /// Transaction label/description.
-    public let label: String
+    let label: String
 }
 
 /// API response containing account details.
-public struct AccountDetailsResponse: Codable {
+struct AccountDetailResponse: Codable {
     /// Current account balance.
-    public let currentBalance: Decimal
+    let currentBalance: Decimal
     /// List of recent transactions.
-    public let transactions: [Transaction]
+    let transactions: [Transaction]
 }
 
 // MARK: - Service-specific Errors
 
 /// Possible errors when fetching account details.
-public enum AccountServiceError: Error {
+enum AccountServiceError: Error {
     /// The constructed URL is invalid.
     case invalidURL
     /// The server responded with an invalid HTTP status code.
@@ -37,9 +37,19 @@ public enum AccountServiceError: Error {
     case decodingFailed(underlying: Error)
 }
 
-// MARK: - Account Details Service
+// MARK: - Service
 
-public struct AccountDetailsService {
+/// Abstraction for fetching account details.
+protocol AccountDetailServicing {
+    /// Fetches account details using the authentication token.
+    /// - Parameter token: Authentication token to include in the header.
+    /// - Throws: Errors related to networking or decoding.
+    /// - Returns: An `AccountDetailsResponse` instance containing account data.
+    func getAccount(token: String) async throws -> AccountDetailResponse
+}
+
+
+struct AccountDetailService: AccountDetailServicing {
     private let baseUrl: URL = {
         guard let base = ProcessInfo.processInfo.environment["AURA_BASE_URL"],
               let url = URL(string: base) else {
@@ -52,7 +62,7 @@ public struct AccountDetailsService {
     /// - Parameter token: Authentication token to include in the header.
     /// - Throws: `AccountServiceError` in case of network or decoding issues.
     /// - Returns: An `AccountDetailsResponse` instance containing account data.
-    public func getAccount(token: String) async throws -> AccountDetailsResponse {
+    func getAccount(token: String) async throws -> AccountDetailResponse {
         let url = baseUrl.appendingPathComponent("/account")
         
         var request = URLRequest(url: url)
@@ -74,7 +84,7 @@ public struct AccountDetailsService {
         decoder.userInfo = [:] // no special config needed for Decimal
         
         do {
-            return try decoder.decode(AccountDetailsResponse.self, from: data)
+            return try decoder.decode(AccountDetailResponse.self, from: data)
         } catch {
             throw AccountServiceError.decodingFailed(underlying: error)
         }
@@ -82,10 +92,10 @@ public struct AccountDetailsService {
 }
 
 #if DEBUG
-extension AccountDetailsService {
+extension AccountDetailService {
     /// Example response stub for previews or tests.
-    public static func previewStub() -> AccountDetailsResponse {
-        return AccountDetailsResponse(
+    public static func previewStub() -> AccountDetailResponse {
+        return AccountDetailResponse(
             currentBalance: Decimal(string: "1234.56") ?? 0,
             transactions: [
                 Transaction(value: Decimal(string: "-50.75") ?? 0, label: "Déjeuner"),

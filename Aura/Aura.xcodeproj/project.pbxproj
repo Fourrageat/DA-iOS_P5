@@ -24,7 +24,7 @@
 		F4D2A94F2ECFA58F00AFB7B0 /* AuthenticationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D2A94E2ECFA4DD00AFB7B0 /* AuthenticationServiceTests.swift */; };
 		F4D9D3F72ECA9C3300C36C45 /* TransactionDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D9D3F62ECA9C3300C36C45 /* TransactionDetailsView.swift */; };
 		F4E9C0682ED5DF1900DC591D /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E9C0672ED5DF0E00DC591D /* KeychainService.swift */; };
-		F4E9C06A2ED5F7BB00DC591D /* AccountDetailsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E9C0692ED5F7A600DC591D /* AccountDetailsService.swift */; };
+		F4E9C06A2ED5F7BB00DC591D /* AccountDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E9C0692ED5F7A600DC591D /* AccountDetailService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,7 +57,7 @@
 		F4D2A94E2ECFA4DD00AFB7B0 /* AuthenticationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationServiceTests.swift; sourceTree = "<group>"; };
 		F4D9D3F62ECA9C3300C36C45 /* TransactionDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailsView.swift; sourceTree = "<group>"; };
 		F4E9C0672ED5DF0E00DC591D /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
-		F4E9C0692ED5F7A600DC591D /* AccountDetailsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsService.swift; sourceTree = "<group>"; };
+		F4E9C0692ED5F7A600DC591D /* AccountDetailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,7 +153,7 @@
 		F41E2C532EC2508800DE745B /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				F4E9C0692ED5F7A600DC591D /* AccountDetailsService.swift */,
+				F4E9C0692ED5F7A600DC591D /* AccountDetailService.swift */,
 				F4E9C0672ED5DF0E00DC591D /* KeychainService.swift */,
 				F41E2C552EC250D600DE745B /* AuthenticationService.swift */,
 			);
@@ -282,7 +282,7 @@
 				F41E2C562EC250D600DE745B /* AuthenticationService.swift in Sources */,
 				53D4188D2AC709F40070ADB1 /* AppViewModel.swift in Sources */,
 				F4E9C0682ED5DF1900DC591D /* KeychainService.swift in Sources */,
-				F4E9C06A2ED5F7BB00DC591D /* AccountDetailsService.swift in Sources */,
+				F4E9C06A2ED5F7BB00DC591D /* AccountDetailService.swift in Sources */,
 				53D418A12AC71B8F0070ADB1 /* View+Extensions.swift in Sources */,
 				53D418992AC70FD80070ADB1 /* Color+Extensions.swift in Sources */,
 			);

@@ -27,7 +27,7 @@ class AuthenticationViewModel: ObservableObject {
             let response = try await service.authenticate(username: username, password: password)
             // Handle successful authentication, e.g., trigger callback
             onLoginSucceed()
-            // Store Token. let token = try? Keychain.get("auth_token") to use it
+            // Store Token. `let token = try? Keychain.get("auth_token")` to use it
             do {
                 try Keychain.set(response, for: "auth_token")
             } catch {

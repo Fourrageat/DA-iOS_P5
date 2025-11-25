@@ -78,6 +78,9 @@ struct AccountDetailView: View {
                 self.endEditing(true)  // This will dismiss the keyboard when tapping outside
             }
             .toolbar(hideTabBar ? .hidden : .visible, for: .tabBar)
+            .task {
+                await viewModel.fetchData()
+            }
         }
     }
 }

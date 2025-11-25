@@ -28,7 +28,6 @@ class AuthenticationViewModel: ObservableObject {
             // Handle successful authentication, e.g., trigger callback
             onLoginSucceed()
             // You can also use `response` if needed
-            _ = response
             print(response)
         } catch {
             self.showErrorAlert = true

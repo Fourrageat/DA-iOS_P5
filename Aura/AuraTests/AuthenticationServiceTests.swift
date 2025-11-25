@@ -55,29 +55,21 @@ final class AuthenticationServiceTests: XCTestCase {
         super.tearDown()
     }
 
-//    func testAuthenticateReturnsToken() async throws {
-//        StubURLProtocol.requestHandler = { request in
-//            XCTAssertEqual(request.httpMethod, "POST")
-//            XCTAssertEqual(request.url?.path, "/auth")
-//            XCTAssertEqual(request.value(forHTTPHeaderField: "Content-Type"), "application/json")
-//
-//            guard let body = request.httpBody else {
-//                throw NSError(domain: "StubURLProtocol", code: -1, userInfo: [NSLocalizedDescriptionKey: "No body"])
-//            }
-//            let decoded = try JSONDecoder().decode(AuthRequest.self, from: body)
-//            XCTAssertEqual(decoded.username, "user1")
-//            XCTAssertEqual(decoded.password, "pass1")
-//
-//            let url = URL(string: "https://example.com/auth")!
-//            let response = makeResponse(url: url, status: 200)
-//            let data = "{\"token\":\"abc123\"}".data(using: .utf8)!
-//            return (response, data)
-//        }
-//
-//        let service = AuthenticationService()
-//        let token = try await service.authenticate(username: "user1", password: "pass1")
-//        XCTAssertEqual(token, "abc123")
-//    }
+    func testAuthenticateReturnsToken() async throws {
+        StubURLProtocol.requestHandler = { request in
+            XCTAssertEqual(request.httpMethod, "POST")
+            XCTAssertEqual(request.url?.path, "/auth")
+
+            let url = URL(string: "https://example.com/auth")!
+            let response = makeResponse(url: url, status: 200)
+            let data = "{\"token\":\"abc123\"}".data(using: .utf8)!
+            return (response, data)
+        }
+
+        let service = AuthenticationService()
+        let token = try await service.authenticate(username: "user1", password: "pass1")
+        XCTAssertEqual(token, "abc123")
+    }
 
     func testAuthenticateThrowsSpecificErrorOn400() async {
         StubURLProtocol.requestHandler = { _ in

@@ -8,14 +8,9 @@
 import Foundation
 
 class TransactionDetailsViewModel: ObservableObject {
-    @Published var transactions: [Transaction] = []
+    @Published var transactions: [Transactions] = []
     
-    struct Transaction {
-        let label: String
-        let value: String
-    }
-    
-    func fetchData() async {
+    func fetchTransactions() async {
         let service: AccountDetailServicing = AccountDetailService()
         
         do {
@@ -29,7 +24,7 @@ class TransactionDetailsViewModel: ObservableObject {
             await MainActor.run { [weak self] in
                 // Map service transactions to local view model transactions
                 self?.transactions = response.transactions.map { transaction in
-                    Transaction(label: transaction.label, value: "\(transaction.value)")
+                    Transactions(label: transaction.label, value: "\(transaction.value)")
                 }
             }
         } catch {

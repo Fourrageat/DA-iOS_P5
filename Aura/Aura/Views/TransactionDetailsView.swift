@@ -16,12 +16,13 @@ struct TransactionDetailsView: View {
             .padding([.horizontal])
         ScrollView {
             LazyVStack(alignment: .leading, spacing: 10) {
-                TransactionList(transactions: viewModel.transactions as! [AccountDetailViewModel.Transaction])
+                TransactionList(transactions: viewModel.transactions)
             }
             .padding(.top, 10)
         }
         .task {
-            await viewModel.fetchData()
+            await viewModel.fetchTransactions()
+            print(viewModel.transactions)
         }
     }
 }

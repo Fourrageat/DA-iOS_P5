@@ -9,12 +9,7 @@ import Foundation
 
 class AccountDetailViewModel: ObservableObject {
     @Published var totalAmount: String = "..."
-    @Published var recentTransactions: [Transaction] = []
-    
-    struct Transaction {
-        let label: String
-        let value: String
-    }
+    @Published var recentTransactions: [Transactions] = []
     
     func fetchData() async {
         let service: AccountDetailServicing = AccountDetailService()
@@ -32,7 +27,7 @@ class AccountDetailViewModel: ObservableObject {
                 self?.totalAmount = "€\(response.currentBalance)"
                 // Map service transactions to local view model transactions
                 self?.recentTransactions = response.transactions.prefix(3).map { transaction in
-                    Transaction(label: transaction.label, value: "\(transaction.value)")
+                    Transactions(label: transaction.label, value: "\(transaction.value)")
                 }
             }
         } catch {

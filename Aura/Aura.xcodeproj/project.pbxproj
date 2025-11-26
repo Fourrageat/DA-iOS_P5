@@ -27,6 +27,7 @@
 		F4E9C06A2ED5F7BB00DC591D /* AccountDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E9C0692ED5F7A600DC591D /* AccountDetailService.swift */; };
 		F4E9C06C2ED6FD5C00DC591D /* TransactionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E9C06B2ED6FD5C00DC591D /* TransactionList.swift */; };
 		F4E9C06F2ED707CF00DC591D /* TransactionDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E9C06E2ED707CA00DC591D /* TransactionDetailsViewModel.swift */; };
+		F4E9C0712ED734A800DC591D /* Transactions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E9C0702ED7349B00DC591D /* Transactions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,7 @@
 		F4E9C0692ED5F7A600DC591D /* AccountDetailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailService.swift; sourceTree = "<group>"; };
 		F4E9C06B2ED6FD5C00DC591D /* TransactionList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionList.swift; sourceTree = "<group>"; };
 		F4E9C06E2ED707CA00DC591D /* TransactionDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailsViewModel.swift; sourceTree = "<group>"; };
+		F4E9C0702ED7349B00DC591D /* Transactions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transactions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +160,7 @@
 		F41E2C532EC2508800DE745B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				F4E9C0702ED7349B00DC591D /* Transactions.swift */,
 				F4E9C0692ED5F7A600DC591D /* AccountDetailService.swift */,
 				F4E9C0672ED5DF0E00DC591D /* KeychainService.swift */,
 				F41E2C552EC250D600DE745B /* AuthenticationService.swift */,
@@ -292,6 +295,7 @@
 				53D4189D2AC715AA0070ADB1 /* AccountDetailViewModel.swift in Sources */,
 				53D418912AC70A920070ADB1 /* AuthenticationView.swift in Sources */,
 				F4E9C06F2ED707CF00DC591D /* TransactionDetailsViewModel.swift in Sources */,
+				F4E9C0712ED734A800DC591D /* Transactions.swift in Sources */,
 				53D418932AC70AB10070ADB1 /* AccountDetailView.swift in Sources */,
 				F4D9D3F72ECA9C3300C36C45 /* TransactionDetailsView.swift in Sources */,
 				53D4189F2AC717890070ADB1 /* MoneyTransferViewModel.swift in Sources */,

@@ -8,21 +8,23 @@
 import SwiftUI
 
 struct TransactionDetailsView: View {
-    @ObservedObject var viewModel: AccountDetailViewModel
+    @StateObject var viewModel: TransactionDetailsViewModel
     
     var body: some View {
-        ScrollView {
-            LazyVStack(alignment: .leading, spacing: 10) {
-                Text("All Transactions")
-                    .font(.headline)
-                    .padding([.horizontal])
-                
-                TransactionList(transactions: viewModel.recentTransactions)
+        VStack {
+            Text("All Transactions")
+                .font(.headline)
+                .padding([.horizontal])
+            ScrollView {
+                LazyVStack(alignment: .leading, spacing: 10) {
+                    TransactionsList(transactions: viewModel.transactions)
+                }
+                .padding(.top, 10)
             }
-            .padding(.top, 10)
         }
         .task {
-            await viewModel.fetchData()
+            await viewModel.fetchTransactions()
         }
     }
 }
+

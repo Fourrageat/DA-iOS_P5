@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct TransactionList: View {
-    let transactions: [AccountDetailViewModel.Transaction]
+struct TransactionsList: View {
+    let transactions: [Transactions]
     
     var body: some View {
         ForEach(transactions, id: \.label) { transaction in

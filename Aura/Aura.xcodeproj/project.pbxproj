@@ -25,7 +25,7 @@
 		F4D9D3F72ECA9C3300C36C45 /* TransactionDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D9D3F62ECA9C3300C36C45 /* TransactionDetailsView.swift */; };
 		F4E9C0682ED5DF1900DC591D /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E9C0672ED5DF0E00DC591D /* KeychainService.swift */; };
 		F4E9C06A2ED5F7BB00DC591D /* AccountDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E9C0692ED5F7A600DC591D /* AccountDetailService.swift */; };
-		F4E9C06C2ED6FD5C00DC591D /* TransactionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E9C06B2ED6FD5C00DC591D /* TransactionList.swift */; };
+		F4E9C06C2ED6FD5C00DC591D /* TransactionsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E9C06B2ED6FD5C00DC591D /* TransactionsList.swift */; };
 		F4E9C06F2ED707CF00DC591D /* TransactionDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E9C06E2ED707CA00DC591D /* TransactionDetailsViewModel.swift */; };
 		F4E9C0712ED734A800DC591D /* Transactions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E9C0702ED7349B00DC591D /* Transactions.swift */; };
 /* End PBXBuildFile section */
@@ -61,7 +61,7 @@
 		F4D9D3F62ECA9C3300C36C45 /* TransactionDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailsView.swift; sourceTree = "<group>"; };
 		F4E9C0672ED5DF0E00DC591D /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		F4E9C0692ED5F7A600DC591D /* AccountDetailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailService.swift; sourceTree = "<group>"; };
-		F4E9C06B2ED6FD5C00DC591D /* TransactionList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionList.swift; sourceTree = "<group>"; };
+		F4E9C06B2ED6FD5C00DC591D /* TransactionsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsList.swift; sourceTree = "<group>"; };
 		F4E9C06E2ED707CA00DC591D /* TransactionDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailsViewModel.swift; sourceTree = "<group>"; };
 		F4E9C0702ED7349B00DC591D /* Transactions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transactions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -180,7 +180,7 @@
 			isa = PBXGroup;
 			children = (
 				F4986F312ECDE9EF00F1F929 /* CustomAlertPopupView.swift */,
-				F4E9C06B2ED6FD5C00DC591D /* TransactionList.swift */,
+				F4E9C06B2ED6FD5C00DC591D /* TransactionsList.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -289,7 +289,7 @@
 			files = (
 				53D4187C2AC7099A0070ADB1 /* AuraApp.swift in Sources */,
 				53D418952AC70ABF0070ADB1 /* MoneyTransferView.swift in Sources */,
-				F4E9C06C2ED6FD5C00DC591D /* TransactionList.swift in Sources */,
+				F4E9C06C2ED6FD5C00DC591D /* TransactionsList.swift in Sources */,
 				F4986F322ECDE9F400F1F929 /* CustomAlertPopupView.swift in Sources */,
 				53D4189B2AC711990070ADB1 /* AuthenticationViewModel.swift in Sources */,
 				53D4189D2AC715AA0070ADB1 /* AccountDetailViewModel.swift in Sources */,

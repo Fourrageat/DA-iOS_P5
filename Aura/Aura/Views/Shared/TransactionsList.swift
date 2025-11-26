@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TransactionList: View {
+struct TransactionsList: View {
     let transactions: [Transactions]
     
     var body: some View {

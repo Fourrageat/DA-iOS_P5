@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AccountDetailView: View {
-    @ObservedObject var viewModel: AccountDetailViewModel
+    @StateObject var viewModel: AccountDetailViewModel
     @State private var hideTabBar = false
     
     var body: some View {
@@ -35,7 +35,7 @@ struct AccountDetailView: View {
                         .font(.headline)
                         .padding([.horizontal])
                     
-                    TransactionList(transactions: viewModel.recentTransactions)
+                    TransactionsList(transactions: viewModel.recentTransactions)
                 }
                 
                 // Button to see details of transactions

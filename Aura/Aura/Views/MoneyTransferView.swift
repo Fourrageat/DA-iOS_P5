@@ -78,6 +78,11 @@ struct MoneyTransferView: View {
         .onTapGesture {
             self.endEditing(true)  // This will dismiss the keyboard when tapping outside
         }
+        .customAlertPopup(
+            show: $viewModel.showAlert,
+            message: $viewModel.message,
+            icon: $viewModel.icon
+        )
     }
 }
 

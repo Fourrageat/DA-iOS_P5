@@ -11,9 +11,9 @@ class MoneyTransferViewModel: ObservableObject {
     @Published var recipient: String = ""
     @Published var amount: String = ""
     @Published var transferMessage: String = ""
-    @Published var showErrorAlert: Bool = false
-    @Published var errorMessage: String = "Unknown error"
-    @Published var errorIcon: String = "exclamationmark.circle"
+    @Published var showAlert: Bool = false
+    @Published var message: String = "Unknown error"
+    @Published var icon: String = "exclamationmark.circle"
     
     func sendMoney() async {
         print("Sending money to \(recipient) for amount \(amount)")
@@ -38,9 +38,10 @@ class MoneyTransferViewModel: ObservableObject {
             recipient = ""
             amount = ""
         } catch {
+            self.showAlert = true
             await MainActor.run {
-                self.errorMessage = error.localizedDescription
-                self.errorIcon = errorIcon
+                self.message = error.localizedDescription
+                self.icon = icon
             }
             print("Error: \(error)")
         }

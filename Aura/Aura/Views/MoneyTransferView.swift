@@ -52,7 +52,9 @@ struct MoneyTransferView: View {
                         .keyboardType(.decimalPad)
                 }
 
-                Button(action: viewModel.sendMoney) {
+                Button(action: {
+                    Task { await viewModel.sendMoney() }
+                }) {
                     HStack {
                         Image(systemName: "arrow.right.circle.fill")
                         Text("Send")
@@ -84,3 +86,4 @@ struct MoneyTransferView: View {
 #Preview {
     MoneyTransferView()
 }
+

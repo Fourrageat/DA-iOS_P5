@@ -10,12 +10,12 @@ import Foundation
 // MARK: - DTOs
 struct TransferRequest: Codable {
     let recipient: String
-    let amount: String
+    let amount: Decimal
 }
 
 // MARK: - Service
 protocol MoneyTranfertServicing {
-    func transfert(recipient: String, amount: String) async throws -> Void
+    func transfert(recipient: String, amount: Decimal, token: String) async throws -> Void
 }
 
 struct MoneyTranfertService: MoneyTranfertServicing {
@@ -27,11 +27,12 @@ struct MoneyTranfertService: MoneyTranfertServicing {
         return url
     }()
 
-    func transfert(recipient: String, amount: String) async throws -> Void {
+    func transfert(recipient: String, amount: Decimal, token: String) async throws -> Void {
         let url = baseUrl.appendingPathComponent("/account/transfer")
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue(token, forHTTPHeaderField: "token")
 
         let body = TransferRequest(recipient: recipient, amount: amount)
         request.httpBody = try JSONEncoder().encode(body)

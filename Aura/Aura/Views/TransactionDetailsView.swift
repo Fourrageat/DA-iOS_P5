@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TransactionDetailsView: View {
-    @ObservedObject var viewModel: AccountDetailViewModel
+    @ObservedObject var viewModel: TransactionDetailsViewModel
     
     var body: some View {
         Text("All Transactions")
@@ -16,7 +16,7 @@ struct TransactionDetailsView: View {
             .padding([.horizontal])
         ScrollView {
             LazyVStack(alignment: .leading, spacing: 10) {
-                TransactionList(transactions: viewModel.recentTransactions)
+                TransactionList(transactions: viewModel.transactions as! [AccountDetailViewModel.Transaction])
             }
             .padding(.top, 10)
         }

@@ -40,7 +40,7 @@ struct AccountDetailView: View {
                 
                 // Button to see details of transactions
                 NavigationLink {
-                    TransactionDetailsView(viewModel: viewModel)
+                    TransactionDetailsView(viewModel: TransactionDetailsViewModel())
                         .onAppear {
                             withAnimation(.smooth) { hideTabBar = true }
                         }

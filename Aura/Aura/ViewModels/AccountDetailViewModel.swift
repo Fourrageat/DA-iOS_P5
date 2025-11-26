@@ -8,15 +8,38 @@
 import Foundation
 
 class AccountDetailViewModel: ObservableObject {
-    @Published var totalAmount: String = "€12,345.67"
-    @Published var recentTransactions: [Transaction] = [
-        Transaction(description: "Starbucks", amount: "-€5.50"),
-        Transaction(description: "Amazon Purchase", amount: "-€34.99"),
-        Transaction(description: "Salary", amount: "+€2,500.00")
-    ]
+    @Published var totalAmount: String = "..."
+    @Published var recentTransactions: [Transaction] = []
     
     struct Transaction {
-        let description: String
-        let amount: String
+        let label: String
+        let value: String
+    }
+    
+    func fetchData() async {
+        let service: AccountDetailServicing = AccountDetailService()
+        
+        do {
+            guard let token = try? Keychain.get("auth_token") else {
+                await MainActor.run { [weak self] in
+                    self?.totalAmount = "..."
+                    self?.recentTransactions = []
+                }
+                return
+            }
+            let response = try await service.getAccount(token: token)
+            await MainActor.run { [weak self] in
+                self?.totalAmount = "€\(response.currentBalance)"
+                // Map service transactions to local view model transactions
+                self?.recentTransactions = response.transactions.prefix(3).map { transaction in
+                    Transaction(label: transaction.label, value: "\(transaction.value)")
+                }
+            }
+        } catch {
+            await MainActor.run { [weak self] in
+                self?.totalAmount = "?"
+                self?.recentTransactions = []
+            }
+        }
     }
 }

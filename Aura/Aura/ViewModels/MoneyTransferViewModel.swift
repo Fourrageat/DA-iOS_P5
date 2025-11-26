@@ -12,8 +12,8 @@ class MoneyTransferViewModel: ObservableObject {
     @Published var amount: String = ""
     @Published var transferMessage: String = ""
     @Published var showAlert: Bool = false
-    @Published var message: String = "Unknown error"
-    @Published var icon: String = "exclamationmark.circle"
+    @Published var message: String = ""
+    @Published var icon: String = ""
     
     func sendMoney() async {
         print("Sending money to \(recipient) for amount \(amount)")
@@ -34,14 +34,18 @@ class MoneyTransferViewModel: ObservableObject {
             if !recipient.isEmpty && !amount.isEmpty {
                 let _: Void = try await service.transfert(recipient: recipient, amount: value, token: token)
             }
-            transferMessage = "Successfully transferred \(amount) to \(recipient)"
+            self.showAlert = true
+            await MainActor.run {
+                self.message = "Success"
+                self.icon = "checkmark.circle"
+            }
             recipient = ""
             amount = ""
         } catch {
             self.showAlert = true
             await MainActor.run {
-                self.message = error.localizedDescription
-                self.icon = icon
+                self.message = "Error"
+                self.icon = "exclamationmark.circle"
             }
             print("Error: \(error)")
         }

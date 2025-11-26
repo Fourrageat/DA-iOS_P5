@@ -32,7 +32,7 @@ struct MoneyTranfertService: MoneyTranfertServicing {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        //request.setValue(token, forHTTPHeaderField: "token")
+        request.setValue(token, forHTTPHeaderField: "token")
 
         let body = TransferRequest(recipient: recipient, amount: amount)
         request.httpBody = try JSONEncoder().encode(body)

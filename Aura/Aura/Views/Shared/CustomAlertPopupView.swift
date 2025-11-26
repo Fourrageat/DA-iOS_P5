@@ -9,8 +9,8 @@ import SwiftUI
 
 private struct CustomAlertPopup: ViewModifier {
     @Binding var show: Bool
-    @Binding var errorMessage: String
-    @Binding var errorIcon: String
+    @Binding var message: String
+    @Binding var icon: String
 
     func body(content: Content) -> some View {
         content
@@ -37,7 +37,7 @@ private struct CustomAlertPopup: ViewModifier {
                                         )
                                         .shadow(color: Color.black.opacity(0.15), radius: 10, x: 0, y: 6)
 
-                                    Image(systemName: errorIcon)
+                                    Image(systemName: icon)
                                         .foregroundStyle(.primary)
                                         .font(.system(size: 34, weight: .semibold))
                                         .accessibilityHidden(true)
@@ -45,7 +45,7 @@ private struct CustomAlertPopup: ViewModifier {
                                 .padding(.top, 8)
 
                                 // Title / message
-                                Text(errorMessage)
+                                Text(message)
                                     .multilineTextAlignment(.center)
                                     .font(.system(.headline, design: .rounded))
                                     .foregroundStyle(.primary)
@@ -94,22 +94,18 @@ private struct CustomAlertPopup: ViewModifier {
 extension View {
     func customAlertPopup(
         show: Binding<Bool>,
-        errorMessage: Binding<String>,
-        errorIcon: Binding<String>) -> some View {
-        modifier(CustomAlertPopup(
-            show: show,
-            errorMessage: errorMessage,
-            errorIcon: errorIcon
-            )
+        message: Binding<String>,
+        icon: Binding<String>) -> some View {
+        modifier(CustomAlertPopup(show: show, message: message, icon: icon)
         )
     }
 }
 
 #Preview {
-    struct ErrorPopupPreviewHost: View {
+    struct AlertPopupPreviewHost: View {
         @State private var show = true
-        @State private var errorMessage = "Error Message"
-        @State private var errorIcon = "exclamationmark.circle"
+        @State private var message = "Error Message"
+        @State private var icon = "exclamationmark.circle"
         
         let gradientStart = Color(hex: "#94A684").opacity(0.7)
         let gradientEnd = Color(hex: "#94A684").opacity(0.0) // Fades to transparent
@@ -119,9 +115,9 @@ extension View {
                 LinearGradient(gradient: Gradient(colors: [gradientStart, gradientEnd]), startPoint: .top, endPoint: .bottomLeading)
                     .edgesIgnoringSafeArea(.all)
             }
-            .customAlertPopup(show: $show, errorMessage: $errorMessage, errorIcon: $errorIcon)
+            .customAlertPopup(show: $show, message: $message, icon: $icon)
         }
     }
 
-    return ErrorPopupPreviewHost()
+    return AlertPopupPreviewHost()
 }

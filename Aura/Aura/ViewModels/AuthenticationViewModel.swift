@@ -8,9 +8,9 @@
 import Foundation
 
 class AuthenticationViewModel: ObservableObject {
-    @Published var showErrorAlert: Bool = false
-    @Published var errorMessage: String = "Unknown error"
-    @Published var errorIcon: String = "exclamationmark.circle"
+    @Published var showAlert: Bool = false
+    @Published var message: String = ""
+    @Published var icon: String = ""
     @Published var username: String = ""
     @Published var password: String = ""
     
@@ -37,18 +37,18 @@ class AuthenticationViewModel: ObservableObject {
             let token = try? Keychain.get("auth_token")
             print(token!)
         } catch {
-            self.showErrorAlert = true
+            self.showAlert = true
             if let nsError = error as NSError?, nsError.code == 400 {
                 await MainActor.run {
                     username = ""
                     password = ""
-                    self.errorMessage = "Identifiants incorrects. Veuillez réessayer."
-                    self.errorIcon = "nosign"
+                    self.message = "Bad credentials. Please try again."
+                    self.icon = "nosign"
                 }
             } else {
                 await MainActor.run {
-                    self.errorMessage = error.localizedDescription
-                    self.errorIcon = errorIcon
+                    self.message = error.localizedDescription
+                    self.icon = "exclamationmark.circle"
                 }
             }
             print("Authentication failed with error: \(error)")

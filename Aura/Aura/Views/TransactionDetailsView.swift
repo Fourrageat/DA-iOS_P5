@@ -11,18 +11,20 @@ struct TransactionDetailsView: View {
     @ObservedObject var viewModel: TransactionDetailsViewModel
     
     var body: some View {
-        Text("All Transactions")
-            .font(.headline)
-            .padding([.horizontal])
-        ScrollView {
-            LazyVStack(alignment: .leading, spacing: 10) {
-                TransactionList(transactions: viewModel.transactions)
+        VStack {
+            Text("All Transactions")
+                .font(.headline)
+                .padding([.horizontal])
+            ScrollView {
+                LazyVStack(alignment: .leading, spacing: 10) {
+                    TransactionList(transactions: viewModel.transactions)
+                }
+                .padding(.top, 10)
             }
-            .padding(.top, 10)
         }
         .task {
             await viewModel.fetchTransactions()
-            print(viewModel.transactions)
         }
     }
 }
+

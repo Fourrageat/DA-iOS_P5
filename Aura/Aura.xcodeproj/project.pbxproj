@@ -25,6 +25,7 @@
 		F4D9D3F72ECA9C3300C36C45 /* TransactionDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D9D3F62ECA9C3300C36C45 /* TransactionDetailsView.swift */; };
 		F4E9C0682ED5DF1900DC591D /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E9C0672ED5DF0E00DC591D /* KeychainService.swift */; };
 		F4E9C06A2ED5F7BB00DC591D /* AccountDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E9C0692ED5F7A600DC591D /* AccountDetailService.swift */; };
+		F4E9C06C2ED6FD5C00DC591D /* TransactionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E9C06B2ED6FD5C00DC591D /* TransactionList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		F4D9D3F62ECA9C3300C36C45 /* TransactionDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailsView.swift; sourceTree = "<group>"; };
 		F4E9C0672ED5DF0E00DC591D /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		F4E9C0692ED5F7A600DC591D /* AccountDetailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailService.swift; sourceTree = "<group>"; };
+		F4E9C06B2ED6FD5C00DC591D /* TransactionList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,7 +123,7 @@
 		53D418892AC709AD0070ADB1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				F4986F312ECDE9EF00F1F929 /* CustomAlertPopupView.swift */,
+				F4E9C06D2ED7006B00DC591D /* Shared */,
 				53D418902AC70A920070ADB1 /* AuthenticationView.swift */,
 				53D418922AC70AB10070ADB1 /* AccountDetailView.swift */,
 				53D418942AC70ABF0070ADB1 /* MoneyTransferView.swift */,
@@ -166,6 +168,15 @@
 				F4D2A94E2ECFA4DD00AFB7B0 /* AuthenticationServiceTests.swift */,
 			);
 			path = AuraTests;
+			sourceTree = "<group>";
+		};
+		F4E9C06D2ED7006B00DC591D /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				F4986F312ECDE9EF00F1F929 /* CustomAlertPopupView.swift */,
+				F4E9C06B2ED6FD5C00DC591D /* TransactionList.swift */,
+			);
+			path = Shared;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -272,6 +283,7 @@
 			files = (
 				53D4187C2AC7099A0070ADB1 /* AuraApp.swift in Sources */,
 				53D418952AC70ABF0070ADB1 /* MoneyTransferView.swift in Sources */,
+				F4E9C06C2ED6FD5C00DC591D /* TransactionList.swift in Sources */,
 				F4986F322ECDE9F400F1F929 /* CustomAlertPopupView.swift in Sources */,
 				53D4189B2AC711990070ADB1 /* AuthenticationViewModel.swift in Sources */,
 				53D4189D2AC715AA0070ADB1 /* AccountDetailViewModel.swift in Sources */,

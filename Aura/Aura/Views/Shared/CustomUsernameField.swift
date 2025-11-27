@@ -25,14 +25,14 @@ struct CustomUsernameField: View {
             .cornerRadius(8)
             .overlay(
                 RoundedRectangle(cornerRadius: 8)
-                    .stroke(fieldTouched && !isUsernameValid ? Color.red : Color.clear, lineWidth: 2)
+                    .stroke(fieldTouched && !isUsernameValid && !username.isEmpty ? Color.red : Color.clear, lineWidth: 2)
             )
             .keyboardType(.emailAddress)
             .disableAutocorrection(true)
             .textContentType(.username)
             .textInputAutocapitalization(.never)
 
-            if fieldTouched && !isUsernameValid {
+            if fieldTouched && !isUsernameValid && !username.isEmpty {
                 Text(isTranserView ? "Enter a valid email or phone number." : "Enter a valid email.")
                     .font(.footnote)
                     .foregroundColor(.red)

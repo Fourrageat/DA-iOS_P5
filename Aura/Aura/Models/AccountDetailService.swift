@@ -10,7 +10,7 @@ import Foundation
 // MARK: - DTOs
 
 /// Represents a banking transaction.
-struct Transaction: Codable {
+struct TransactionResponse: Codable {
     /// Monetary amount of the transaction.
     let value: Decimal
     /// Transaction label/description.
@@ -22,7 +22,7 @@ struct AccountDetailResponse: Codable {
     /// Current account balance.
     let currentBalance: Decimal
     /// List of recent transactions.
-    let transactions: [Transaction]
+    let transactions: [TransactionResponse]
 }
 
 // MARK: - Service-specific Errors
@@ -98,9 +98,9 @@ extension AccountDetailService {
         return AccountDetailResponse(
             currentBalance: Decimal(string: "1234.56") ?? 0,
             transactions: [
-                Transaction(value: Decimal(string: "-50.75") ?? 0, label: "Déjeuner"),
-                Transaction(value: Decimal(string: "-120.00") ?? 0, label: "Courses"),
-                Transaction(value: Decimal(string: "2000.00") ?? 0, label: "Salaire")
+                TransactionResponse(value: Decimal(string: "-50.75") ?? 0, label: "Déjeuner"),
+                TransactionResponse(value: Decimal(string: "-120.00") ?? 0, label: "Courses"),
+                TransactionResponse(value: Decimal(string: "2000.00") ?? 0, label: "Salaire")
             ]
         )
     }

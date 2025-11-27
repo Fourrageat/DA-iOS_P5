@@ -91,8 +91,3 @@ private extension View {
     }
 }
 
-#Preview {
-    AuthenticationView(viewModel: AuthenticationViewModel({
-        
-    }))
-}

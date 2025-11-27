@@ -8,29 +8,29 @@
 import Foundation
 
 class TransactionDetailsViewModel: ObservableObject {
-    @Published var transactions: [Transactions] = []
+    @Published var transactions: [Transaction] = []
     
+    var service: AccountDetailServicing
+    
+    init(service: AccountDetailServicing = AccountDetailService()) {
+        self.service = service
+    }
+    
+    @MainActor
     func fetchTransactions() async {
-        let service: AccountDetailServicing = AccountDetailService()
         
         do {
             guard let token = try? Keychain.get("auth_token") else {
-                await MainActor.run { [weak self] in
-                    self?.transactions = []
-                }
                 return
             }
             let response = try await service.getAccount(token: token)
-            await MainActor.run { [weak self] in
-                // Map service transactions to local view model transactions
-                self?.transactions = response.transactions.map { transaction in
-                    Transactions(label: transaction.label, value: "\(transaction.value)")
-                }
+            // Map service transactions to local view model transactions
+            transactions = response.transactions.map { transaction in
+                Transaction(label: transaction.label, value: "\(transaction.value)")
             }
+            
         } catch {
-            await MainActor.run { [weak self] in
-                self?.transactions = []
-            }
+            print(error)
         }
     }
 }

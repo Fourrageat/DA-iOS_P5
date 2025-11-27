@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TransactionsList: View {
-    let transactions: [Transactions]
+    let transactions: [Transaction]
     
     var body: some View {
         ForEach(transactions, id: \.label) { transaction in

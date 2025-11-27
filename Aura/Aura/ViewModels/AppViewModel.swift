@@ -15,9 +15,13 @@ class AppViewModel: ObservableObject {
     }
     
     var authenticationViewModel: AuthenticationViewModel {
-        return AuthenticationViewModel { [weak self] in
-            self?.isLogged = true
+        let viewModel = AuthenticationViewModel()
+        viewModel.onLoginSucceed = {
+            DispatchQueue.main.async { [weak self] in
+                self?.isLogged = true
+            }
         }
+        return viewModel
     }
     
     var accountDetailViewModel: AccountDetailViewModel {

@@ -8,25 +8,27 @@
 import Foundation
 
 class AuthenticationViewModel: ObservableObject {
-    @Published var showErrorAlert: Bool = false
-    @Published var errorMessage: String = "Unknown error"
-    @Published var errorIcon: String = "exclamationmark.circle"
+    @Published var showAlert: Bool = false
+    @Published var message: String = ""
+    @Published var icon: String = ""
     @Published var username: String = ""
     @Published var password: String = ""
     
-    let onLoginSucceed: (() -> ())
+    var onLoginSucceed: (() -> Void)?
+    let service: AuthenticationServicing
     
-    init(_ callback: @escaping () -> ()) {
-        self.onLoginSucceed = callback
+    init(service: AuthenticationServicing = AuthenticationService()) {
+        self.service = service
     }
     
+    @MainActor
     func login() async {
         print("login with \(username) and \(password)")
-        let service: AuthenticationServicing = AuthenticationService()
+        
         do {
             let response = try await service.authenticate(username: username, password: password)
             // Handle successful authentication, e.g., trigger callback
-            onLoginSucceed()
+            onLoginSucceed?()
             // Store Token. `let token = try? Keychain.get("auth_token")` to use it
             do {
                 try Keychain.set(response, for: "auth_token")
@@ -34,22 +36,17 @@ class AuthenticationViewModel: ObservableObject {
                 print("Failed to store token in Keychain: \(error)")
                 throw error
             }
-            let token = try? Keychain.get("auth_token")
-            print(token!)
+
         } catch {
-            self.showErrorAlert = true
+            showAlert = true
             if let nsError = error as NSError?, nsError.code == 400 {
-                await MainActor.run {
-                    username = ""
-                    password = ""
-                    self.errorMessage = "Identifiants incorrects. Veuillez réessayer."
-                    self.errorIcon = "nosign"
-                }
+                username = ""
+                password = ""
+                message = "Bad credentials. Please try again."
+                icon = "nosign"
             } else {
-                await MainActor.run {
-                    self.errorMessage = error.localizedDescription
-                    self.errorIcon = errorIcon
-                }
+                message = error.localizedDescription
+                icon = "exclamationmark.circle"
             }
             print("Authentication failed with error: \(error)")
         }

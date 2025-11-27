@@ -19,7 +19,6 @@ struct TransactionDetailsView: View {
                 LazyVStack(alignment: .leading, spacing: 10) {
                     TransactionsList(transactions: viewModel.transactions)
                 }
-                .padding(.top, 10)
             }
         }
         .task {

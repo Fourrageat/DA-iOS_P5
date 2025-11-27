@@ -23,6 +23,7 @@
 		F4644AC72ED7757800CEF66A /* MoneyTransferService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4644AC62ED7756900CEF66A /* MoneyTransferService.swift */; };
 		F4986F322ECDE9F400F1F929 /* CustomAlertPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4986F312ECDE9EF00F1F929 /* CustomAlertPopupView.swift */; };
 		F4D2A94F2ECFA58F00AFB7B0 /* AuthenticationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D2A94E2ECFA4DD00AFB7B0 /* AuthenticationServiceTests.swift */; };
+		F4D824A52ED881F80038C44F /* CustomUsernameField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D824A42ED881E30038C44F /* CustomUsernameField.swift */; };
 		F4D9D3F72ECA9C3300C36C45 /* TransactionDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D9D3F62ECA9C3300C36C45 /* TransactionDetailsView.swift */; };
 		F4E9C0682ED5DF1900DC591D /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E9C0672ED5DF0E00DC591D /* KeychainService.swift */; };
 		F4E9C06A2ED5F7BB00DC591D /* AccountDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E9C0692ED5F7A600DC591D /* AccountDetailService.swift */; };
@@ -60,6 +61,7 @@
 		F4644AC62ED7756900CEF66A /* MoneyTransferService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyTransferService.swift; sourceTree = "<group>"; };
 		F4986F312ECDE9EF00F1F929 /* CustomAlertPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertPopupView.swift; sourceTree = "<group>"; };
 		F4D2A94E2ECFA4DD00AFB7B0 /* AuthenticationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationServiceTests.swift; sourceTree = "<group>"; };
+		F4D824A42ED881E30038C44F /* CustomUsernameField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUsernameField.swift; sourceTree = "<group>"; };
 		F4D9D3F62ECA9C3300C36C45 /* TransactionDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailsView.swift; sourceTree = "<group>"; };
 		F4E9C0672ED5DF0E00DC591D /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		F4E9C0692ED5F7A600DC591D /* AccountDetailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailService.swift; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 		F4E9C06D2ED7006B00DC591D /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				F4D824A42ED881E30038C44F /* CustomUsernameField.swift */,
 				F4986F312ECDE9EF00F1F929 /* CustomAlertPopupView.swift */,
 				F4E9C06B2ED6FD5C00DC591D /* TransactionsList.swift */,
 			);
@@ -309,6 +312,7 @@
 				F4E9C06A2ED5F7BB00DC591D /* AccountDetailService.swift in Sources */,
 				53D418A12AC71B8F0070ADB1 /* View+Extensions.swift in Sources */,
 				53D418992AC70FD80070ADB1 /* Color+Extensions.swift in Sources */,
+				F4D824A52ED881F80038C44F /* CustomUsernameField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

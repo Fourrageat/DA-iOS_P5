@@ -10,6 +10,21 @@ import SwiftUI
 struct MoneyTransferView: View {
     @ObservedObject var viewModel = MoneyTransferViewModel()
     @State private var animationScale: CGFloat = 1.0
+    @State private var fieldTouched: Bool = false
+    
+    private var isUsernameValid: Bool {
+        var input = viewModel.recipient.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        input = input.replacingOccurrences(of: " ", with: "")
+
+        let emailPattern = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}$"
+        let emailPredicate = NSPredicate(format: "SELF MATCHES[c] %@", emailPattern)
+
+        let phonePattern = "^0[1-9][0-9]{8}$"
+        let phonePredicate = NSPredicate(format: "SELF MATCHES %@", phonePattern)
+
+        return emailPredicate.evaluate(with: input) || phonePredicate.evaluate(with: input)
+    }
 
     var body: some View {
         VStack(spacing: 20) {
@@ -34,11 +49,8 @@ struct MoneyTransferView: View {
             VStack(alignment: .leading) {
                 Text("Recipient (Email or Phone)")
                     .font(.headline)
-                TextField("Enter recipient's info", text: $viewModel.recipient)
-                    .padding()
-                    .background(Color.gray.opacity(0.2))
-                    .cornerRadius(8)
-                    .keyboardType(.emailAddress)
+
+                CustomUsernameField(fieldTouched: $fieldTouched, username: $viewModel.recipient, isTranserView: true, isUsernameValid: isUsernameValid)
             }
             
             VStack(alignment: .leading) {
@@ -63,6 +75,7 @@ struct MoneyTransferView: View {
                 .foregroundColor(.white)
                 .cornerRadius(8)
             }
+            .disabled(!(isUsernameValid && !viewModel.amount.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty))
             .buttonStyle(PlainButtonStyle())
 
             // Message
@@ -85,7 +98,6 @@ struct MoneyTransferView: View {
         )
     }
 }
-
 
 #Preview {
     MoneyTransferView()

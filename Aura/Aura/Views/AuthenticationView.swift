@@ -18,7 +18,7 @@ struct AuthenticationView: View {
 
     @ObservedObject var viewModel: AuthenticationViewModel
     
-    private var isEmailValid: Bool {
+    private var isUsernameValid: Bool {
         // Simple regex for email validation
         let email = viewModel.username.trimmingCharacters(in: .whitespacesAndNewlines)
         let pattern = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}$"
@@ -42,9 +42,9 @@ struct AuthenticationView: View {
                     .font(.largeTitle)
                     .fontWeight(.semibold)
                 
-                CustomUsernameField(fieldTouched: $fieldTouched, username: $viewModel.username, isTranserView: false)
+                CustomUsernameField(fieldTouched: $fieldTouched, username: $viewModel.username, isTranserView: false, isUsernameValid: isUsernameValid)
                 
-                SecureField("Mot de passe", text: $viewModel.password)
+                SecureField("Password", text: $viewModel.password)
                     .padding()
                     .background(Color(UIColor.secondarySystemBackground))
                     .cornerRadius(8)
@@ -54,10 +54,10 @@ struct AuthenticationView: View {
                     // Handle authentication logic here
                     Task { await viewModel.login() }
                 }) {
-                    Text("Se connecter")
-                        .primaryButtonStyle(isEnabled: (isEmailValid && !viewModel.password.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty))
+                    Text("Login")
+                        .primaryButtonStyle(isEnabled: (isUsernameValid && !viewModel.password.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty))
                 }
-                .disabled(!(isEmailValid && !viewModel.password.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty))
+                .disabled(!(isUsernameValid && !viewModel.password.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty))
             }
             .padding(.horizontal, 40)
         }

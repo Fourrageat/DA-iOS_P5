@@ -19,6 +19,7 @@
 		53D4189D2AC715AA0070ADB1 /* AccountDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D4189C2AC715AA0070ADB1 /* AccountDetailViewModel.swift */; };
 		53D4189F2AC717890070ADB1 /* MoneyTransferViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D4189E2AC717890070ADB1 /* MoneyTransferViewModel.swift */; };
 		53D418A12AC71B8F0070ADB1 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D418A02AC71B8F0070ADB1 /* View+Extensions.swift */; };
+		F4107EC22ED8D85500146F16 /* Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4107EC12ED8D84600146F16 /* Stub.swift */; };
 		F41E2C562EC250D600DE745B /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41E2C552EC250D600DE745B /* AuthenticationService.swift */; };
 		F4644AC72ED7757800CEF66A /* MoneyTransferService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4644AC62ED7756900CEF66A /* MoneyTransferService.swift */; };
 		F4986F322ECDE9F400F1F929 /* CustomAlertPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4986F312ECDE9EF00F1F929 /* CustomAlertPopupView.swift */; };
@@ -56,6 +57,7 @@
 		53D4189C2AC715AA0070ADB1 /* AccountDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailViewModel.swift; sourceTree = "<group>"; };
 		53D4189E2AC717890070ADB1 /* MoneyTransferViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyTransferViewModel.swift; sourceTree = "<group>"; };
 		53D418A02AC71B8F0070ADB1 /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
+		F4107EC12ED8D84600146F16 /* Stub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stub.swift; sourceTree = "<group>"; };
 		F41E2C552EC250D600DE745B /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
 		F41E2C5D2EC256E600DE745B /* AuraTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AuraTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4644AC62ED7756900CEF66A /* MoneyTransferService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyTransferService.swift; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 		F41E2C672EC2570D00DE745B /* AuraTests */ = {
 			isa = PBXGroup;
 			children = (
+				F4107EC12ED8D84600146F16 /* Stub.swift */,
 				F4D2A94E2ECFA4DD00AFB7B0 /* AuthenticationServiceTests.swift */,
 			);
 			path = AuraTests;
@@ -321,6 +324,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4D2A94F2ECFA58F00AFB7B0 /* AuthenticationServiceTests.swift in Sources */,
+				F4107EC22ED8D85500146F16 /* Stub.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,18 +10,18 @@ import SwiftUI
 struct CustomUsernameField: View {
     @Binding var fieldTouched: Bool
     @Binding var username: String
-    let isTranserView: Bool
+    let isTransferView: Bool
     let isUsernameValid: Bool
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            TextField(isTranserView ? "Enter recipient's info" : "Email address", text: $username, onEditingChanged: { isEditing in
+            TextField(isTransferView ? "Enter recipient's info" : "Email address", text: $username, onEditingChanged: { isEditing in
                 if isEditing {
                     fieldTouched = true
                 }
             })
             .padding()
-            .background(isTranserView ? Color.gray.opacity(0.2) : Color(UIColor.secondarySystemBackground))
+            .background(isTransferView ? Color.gray.opacity(0.2) : Color(UIColor.secondarySystemBackground))
             .cornerRadius(8)
             .overlay(
                 RoundedRectangle(cornerRadius: 8)
@@ -33,7 +33,7 @@ struct CustomUsernameField: View {
             .textInputAutocapitalization(.never)
 
             if fieldTouched && !isUsernameValid && !username.isEmpty {
-                Text(isTranserView ? "Enter a valid email or phone number." : "Enter a valid email.")
+                Text(isTransferView ? "Enter a valid email or phone number." : "Enter a valid email.")
                     .font(.footnote)
                     .foregroundColor(.red)
                     .frame(maxWidth: .infinity, alignment: .leading)

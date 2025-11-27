@@ -59,7 +59,7 @@ struct MoneyTransferView: View {
                 Text("Recipient (Email or Phone)")
                     .font(.headline)
 
-                CustomUsernameField(fieldTouched: $fieldTouched, username: $viewModel.recipient, isTranserView: true, isUsernameValid: isUsernameValid)
+                CustomUsernameField(fieldTouched: $fieldTouched, username: $viewModel.recipient, isTransferView: true, isUsernameValid: isUsernameValid)
             }
             
             VStack(alignment: .leading) {

@@ -42,7 +42,7 @@ struct AuthenticationView: View {
                     .font(.largeTitle)
                     .fontWeight(.semibold)
                 
-                CustomUsernameField(fieldTouched: $fieldTouched, username: $viewModel.username, isTranserView: false, isUsernameValid: isUsernameValid)
+                CustomUsernameField(fieldTouched: $fieldTouched, username: $viewModel.username, isTransferView: false, isUsernameValid: isUsernameValid)
                 
                 SecureField("Password", text: $viewModel.password)
                     .padding()

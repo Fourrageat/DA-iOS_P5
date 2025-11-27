@@ -25,6 +25,15 @@ struct MoneyTransferView: View {
 
         return emailPredicate.evaluate(with: input) || phonePredicate.evaluate(with: input)
     }
+    
+    private var isAmountValid: Bool {
+        let trimmed = viewModel.amount.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty else { return false }
+        // Replace comma with dot to support both separators
+        let normalized = trimmed.replacingOccurrences(of: ",", with: ".")
+        if let value = Double(normalized), value > 0 { return true }
+        return false
+    }
 
     var body: some View {
         VStack(spacing: 20) {
@@ -61,6 +70,33 @@ struct MoneyTransferView: View {
                     .background(Color.gray.opacity(0.2))
                     .cornerRadius(8)
                     .keyboardType(.decimalPad)
+                    .onChange(of: viewModel.amount) { oldValue, newValue in
+                        // Allow digits and one decimal separator (dot or comma), and strip leading '+' or '-'
+                        let separators = [".", ","]
+                        var filtered = newValue.replacingOccurrences(of: "+", with: "")
+                        filtered = filtered.replacingOccurrences(of: "-", with: "")
+                        // Keep only digits and separators
+                        filtered = filtered.filter { $0.isNumber || separators.contains(String($0)) }
+                        // Ensure at most one separator (prefer the first encountered)
+                        var result = ""
+                        var hasSeparator = false
+                        for ch in filtered {
+                            if ch == "." || ch == "," {
+                                if !hasSeparator { hasSeparator = true; result.append(ch) }
+                            } else {
+                                result.append(ch)
+                            }
+                        }
+                        // Remove leading zeros like "00" but keep "0" and "0.x"
+                        if result.hasPrefix("00") {
+                            while result.hasPrefix("00") { result.removeFirst() }
+                            if result.isEmpty { result = "0" }
+                        }
+                        // Update only if changed to avoid cursor jump loops
+                        if result != newValue {
+                            viewModel.amount = result
+                        }
+                    }
             }
 
             Button(action: {
@@ -75,7 +111,7 @@ struct MoneyTransferView: View {
                 .foregroundColor(.white)
                 .cornerRadius(8)
             }
-            .disabled(!(isUsernameValid && !viewModel.amount.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty))
+            .disabled(!(isUsernameValid && isAmountValid))
             .buttonStyle(PlainButtonStyle())
 
             // Message

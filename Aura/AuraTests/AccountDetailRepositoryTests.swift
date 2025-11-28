@@ -113,6 +113,5 @@ final class AccountDetailRepositoryTests: XCTestCase {
         let repo = AccountDetailRepository()
         _ = try await repo.getAccount(token: "any")
     }
-    
 }
 

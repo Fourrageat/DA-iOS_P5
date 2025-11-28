@@ -14,15 +14,15 @@ struct TransferRequest: Codable {
 }
 
 // MARK: - Service
-protocol MoneyTranfertRepositoryType {
-    func transfert(recipient: String, amount: Decimal, token: String) async throws -> Void
+protocol MoneyTransferRepositoryType {
+    func transfer(recipient: String, amount: Decimal, token: String) async throws -> Void
 }
 
-struct MoneyTranfertRepository: MoneyTranfertRepositoryType {
+struct MoneyTransferRepository: MoneyTransferRepositoryType {
     
     private let baseURL: URL = HTTP.baseURL()
 
-    func transfert(recipient: String, amount: Decimal, token: String) async throws -> Void {
+    func transfer(recipient: String, amount: Decimal, token: String) async throws -> Void {
         let url = baseURL.appendingPathComponent("/account/transfer")
         do {
             let _: EmptyResponse = try await HTTP.request(

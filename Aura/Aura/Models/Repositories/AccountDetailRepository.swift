@@ -50,60 +50,30 @@ protocol AccountDetailRepositoryType {
 
 
 struct AccountDetailRepository: AccountDetailRepositoryType {
-    private let baseUrl: URL = {
-        guard let base = ProcessInfo.processInfo.environment["AURA_BASE_URL"],
-              let url = URL(string: base) else {
-            preconditionFailure("AURA_BASE_URL is not set or is not a valid URL")
-        }
-        return url
-    }()
+    
+    private let baseURl: URL = HTTP.baseURL()
     
     /// Fetches account details using the authentication token.
     /// - Parameter token: Authentication token to include in the header.
     /// - Throws: `AccountServiceError` in case of network or decoding issues.
     /// - Returns: An `AccountDetailsResponse` instance containing account data.
     func getAccount(token: String) async throws -> AccountDetailResponse {
-        let url = baseUrl.appendingPathComponent("/account")
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        request.setValue(token, forHTTPHeaderField: "token")
-        
-        let (data, response) = try await URLSession.shared.data(for: request)
-        
-        guard let httpResponse = response as? HTTPURLResponse else {
-            throw AccountServiceError.badStatus(code: -1)
-        }
-        
-        guard (200...299).contains(httpResponse.statusCode) else {
-            throw AccountServiceError.badStatus(code: httpResponse.statusCode)
-        }
-        
-        let decoder = JSONDecoder()
-        decoder.nonConformingFloatDecodingStrategy = .throw
-        decoder.userInfo = [:] // no special config needed for Decimal
-        
+        let url = baseURl.appendingPathComponent("/account")
         do {
-            return try decoder.decode(AccountDetailResponse.self, from: data)
-        } catch {
-            throw AccountServiceError.decodingFailed(underlying: error)
+            let response: AccountDetailResponse = try await HTTP.get(
+                url: url,
+                headers: ["token": token]
+            )
+            return response
+        } catch let httpError as HTTPError {
+            switch httpError {
+            case .badStatus(let code, _):
+                throw AccountServiceError.badStatus(code: code)
+            case .decodingFailed(let underlying):
+                throw AccountServiceError.decodingFailed(underlying: underlying)
+            default:
+                throw httpError
+            }
         }
     }
 }
-
-#if DEBUG
-extension AccountDetailRepository {
-    /// Example response stub for previews or tests.
-    public static func previewStub() -> AccountDetailResponse {
-        return AccountDetailResponse(
-            currentBalance: Decimal(string: "1234.56") ?? 0,
-            transactions: [
-                TransactionResponse(value: Decimal(string: "-50.75") ?? 0, label: "Déjeuner"),
-                TransactionResponse(value: Decimal(string: "-120.00") ?? 0, label: "Courses"),
-                TransactionResponse(value: Decimal(string: "2000.00") ?? 0, label: "Salaire")
-            ]
-        )
-    }
-}
-#endif
-

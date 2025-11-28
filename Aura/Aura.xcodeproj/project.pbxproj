@@ -24,6 +24,7 @@
 		F4644AC72ED7757800CEF66A /* MoneyTransferRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4644AC62ED7756900CEF66A /* MoneyTransferRepository.swift */; };
 		F4692BEB2ED9D9880082B858 /* HTTP.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4692BEA2ED9D97E0082B858 /* HTTP.swift */; };
 		F4692BF22ED9E7B60082B858 /* AccountDetailRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4692BF12ED9E7950082B858 /* AccountDetailRepositoryTests.swift */; };
+		F4692BF62ED9F4E30082B858 /* MoneyTransferRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4692BF52ED9F4DF0082B858 /* MoneyTransferRepositoryTests.swift */; };
 		F4986F322ECDE9F400F1F929 /* CustomAlertPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4986F312ECDE9EF00F1F929 /* CustomAlertPopupView.swift */; };
 		F4D2A94F2ECFA58F00AFB7B0 /* AuthenticationRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D2A94E2ECFA4DD00AFB7B0 /* AuthenticationRepositoryTests.swift */; };
 		F4D824A52ED881F80038C44F /* CustomUsernameField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D824A42ED881E30038C44F /* CustomUsernameField.swift */; };
@@ -65,6 +66,7 @@
 		F4644AC62ED7756900CEF66A /* MoneyTransferRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyTransferRepository.swift; sourceTree = "<group>"; };
 		F4692BEA2ED9D97E0082B858 /* HTTP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTP.swift; sourceTree = "<group>"; };
 		F4692BF12ED9E7950082B858 /* AccountDetailRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailRepositoryTests.swift; sourceTree = "<group>"; };
+		F4692BF52ED9F4DF0082B858 /* MoneyTransferRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyTransferRepositoryTests.swift; sourceTree = "<group>"; };
 		F4986F312ECDE9EF00F1F929 /* CustomAlertPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertPopupView.swift; sourceTree = "<group>"; };
 		F4D2A94E2ECFA4DD00AFB7B0 /* AuthenticationRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationRepositoryTests.swift; sourceTree = "<group>"; };
 		F4D824A42ED881E30038C44F /* CustomUsernameField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUsernameField.swift; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 				F4692BF02ED9E3D70082B858 /* Utils */,
 				F4D2A94E2ECFA4DD00AFB7B0 /* AuthenticationRepositoryTests.swift */,
 				F4692BF12ED9E7950082B858 /* AccountDetailRepositoryTests.swift */,
+				F4692BF52ED9F4DF0082B858 /* MoneyTransferRepositoryTests.swift */,
 			);
 			path = AuraTests;
 			sourceTree = "<group>";
@@ -372,6 +375,7 @@
 			files = (
 				F4D2A94F2ECFA58F00AFB7B0 /* AuthenticationRepositoryTests.swift in Sources */,
 				F4692BF22ED9E7B60082B858 /* AccountDetailRepositoryTests.swift in Sources */,
+				F4692BF62ED9F4E30082B858 /* MoneyTransferRepositoryTests.swift in Sources */,
 				F4107EC22ED8D85500146F16 /* Stub.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

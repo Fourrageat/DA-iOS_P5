@@ -15,9 +15,9 @@ class MoneyTransferViewModel: ObservableObject {
     @Published var message: String = ""
     @Published var icon: String = ""
     
-    var service: MoneyTranfertRepositoryType = MoneyTranfertRepository()
+    var service: MoneyTransferRepositoryType = MoneyTransferRepository()
     
-    init(service: MoneyTranfertRepositoryType = MoneyTranfertRepository()) {
+    init(service: MoneyTransferRepositoryType = MoneyTransferRepository()) {
         self.service = service
     }
     
@@ -34,7 +34,7 @@ class MoneyTransferViewModel: ObservableObject {
             }
 
             if !recipient.isEmpty && !amount.isEmpty {
-                try await service.transfert(recipient: recipient, amount: value, token: token)
+                try await service.transfer(recipient: recipient, amount: value, token: token)
             }
             showAlert = true
             message = "Success"

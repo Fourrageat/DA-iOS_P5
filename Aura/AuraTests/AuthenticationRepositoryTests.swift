@@ -1,46 +1,12 @@
-import Foundation
+//
+//  AccountDetailRepositoryTests.swift
+//  Aura
+//
+//  Created by Baptiste Fourrageat on 28/11/2025.
+//
+
 import XCTest
 @testable import Aura
-
-// Helper function to create HTTPURLResponse
-func makeResponse(url: URL, status: Int) -> HTTPURLResponse {
-    HTTPURLResponse(url: url, statusCode: status, httpVersion: nil, headerFields: nil)!
-}
-
-class StubURLProtocol: URLProtocol {
-    static var requestHandler: ((URLRequest) throws -> (HTTPURLResponse, Data))?
-
-    static func reset() {
-        requestHandler = nil
-    }
-
-    override class func canInit(with request: URLRequest) -> Bool {
-        // Intercept all requests
-        true
-    }
-
-    override class func canonicalRequest(for request: URLRequest) -> URLRequest {
-        request
-    }
-
-    override func startLoading() {
-        guard let handler = StubURLProtocol.requestHandler else {
-            fatalError("StubURLProtocol.requestHandler not set")
-        }
-        do {
-            let (response, data) = try handler(request)
-            client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
-            client?.urlProtocol(self, didLoad: data)
-            client?.urlProtocolDidFinishLoading(self)
-        } catch {
-            client?.urlProtocol(self, didFailWithError: error)
-        }
-    }
-
-    override func stopLoading() {
-        // No-op
-    }
-}
 
 final class AuthenticationServiceTests: XCTestCase {
     override func setUp() {
@@ -61,12 +27,12 @@ final class AuthenticationServiceTests: XCTestCase {
             XCTAssertEqual(request.url?.path, "/auth")
 
             let url = URL(string: "https://example.com/auth")!
-            let response = makeResponse(url: url, status: 200)
+            let response = StubURLProtocol.makeResponse(url: url, status: 200)
             let data = "{\"token\":\"abc123\"}".data(using: .utf8)!
             return (response, data)
         }
 
-        let service = AuthenticationService()
+        let service = AuthenticationRepository()
         let token = try await service.authenticate(username: "user1", password: "pass1")
         XCTAssertEqual(token, "abc123")
     }
@@ -74,12 +40,12 @@ final class AuthenticationServiceTests: XCTestCase {
     func testAuthenticateThrowsSpecificErrorOn400() async {
         StubURLProtocol.requestHandler = { _ in
             let url = URL(string: "https://example.com/auth")!
-            let response = makeResponse(url: url, status: 400)
+            let response = StubURLProtocol.makeResponse(url: url, status: 400)
             let data = Data("Bad credentials".utf8)
             return (response, data)
         }
 
-        let service = AuthenticationService()
+        let service = AuthenticationRepository()
         do {
             _ = try await service.authenticate(username: "user", password: "pass")
             XCTFail("Expected error not thrown")
@@ -93,12 +59,12 @@ final class AuthenticationServiceTests: XCTestCase {
     func testAuthenticatePropagatesServerMessage() async {
         StubURLProtocol.requestHandler = { _ in
             let url = URL(string: "https://example.com/auth")!
-            let response = makeResponse(url: url, status: 500)
+            let response = StubURLProtocol.makeResponse(url: url, status: 500)
             let data = Data("Internal Server Error".utf8)
             return (response, data)
         }
 
-        let service = AuthenticationService()
+        let service = AuthenticationRepository()
         do {
             _ = try await service.authenticate(username: "user", password: "pass")
             XCTFail("Expected error not thrown")
@@ -113,12 +79,12 @@ final class AuthenticationServiceTests: XCTestCase {
     func testAuthenticateFailsOnInvalidJSON() async {
         StubURLProtocol.requestHandler = { _ in
             let url = URL(string: "https://example.com/auth")!
-            let response = makeResponse(url: url, status: 200)
+            let response = StubURLProtocol.makeResponse(url: url, status: 200)
             let data = "{\"tokn\":\"missing\"}".data(using: .utf8)!
             return (response, data)
         }
 
-        let service = AuthenticationService()
+        let service = AuthenticationRepository()
         do {
             _ = try await service.authenticate(username: "user", password: "pass")
             XCTFail("Expected decoding error not thrown")

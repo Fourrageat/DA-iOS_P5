@@ -15,9 +15,9 @@ class MoneyTransferViewModel: ObservableObject {
     @Published var message: String = ""
     @Published var icon: String = ""
     
-    var service: MoneyTranfertServicing = MoneyTranfertService()
+    var service: MoneyTranfertRepositoryType = MoneyTranfertRepository()
     
-    init(service: MoneyTranfertServicing = MoneyTranfertService()) {
+    init(service: MoneyTranfertRepositoryType = MoneyTranfertRepository()) {
         self.service = service
     }
     

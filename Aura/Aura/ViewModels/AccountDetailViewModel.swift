@@ -11,9 +11,9 @@ class AccountDetailViewModel: ObservableObject {
     @Published var totalAmount: String = "..."
     @Published var recentTransactions: [Transaction] = []
     
-    var service: AccountDetailServicing
+    var service: AccountDetailRepositoryType
     
-    init(service: AccountDetailServicing = AccountDetailService()) {
+    init(service: AccountDetailRepositoryType = AccountDetailRepository()) {
         self.service = service
     }
     

@@ -18,11 +18,11 @@ struct AuthResponse: Codable {
 }
 
 // MARK: - Service
-protocol AuthenticationServicing {
+protocol AuthenticationRepositoryType {
     func authenticate(username: String, password: String) async throws -> String
 }
 
-struct AuthenticationService: AuthenticationServicing {
+struct AuthenticationRepository: AuthenticationRepositoryType {
     private let baseUrl: URL = {
         guard let base = ProcessInfo.processInfo.environment["AURA_BASE_URL"],
               let url = URL(string: base) else {

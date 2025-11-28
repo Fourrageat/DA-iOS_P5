@@ -20,14 +20,14 @@
 		53D4189F2AC717890070ADB1 /* MoneyTransferViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D4189E2AC717890070ADB1 /* MoneyTransferViewModel.swift */; };
 		53D418A12AC71B8F0070ADB1 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D418A02AC71B8F0070ADB1 /* View+Extensions.swift */; };
 		F4107EC22ED8D85500146F16 /* Stub.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4107EC12ED8D84600146F16 /* Stub.swift */; };
-		F41E2C562EC250D600DE745B /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41E2C552EC250D600DE745B /* AuthenticationService.swift */; };
-		F4644AC72ED7757800CEF66A /* MoneyTransferService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4644AC62ED7756900CEF66A /* MoneyTransferService.swift */; };
+		F41E2C562EC250D600DE745B /* AuthenticationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41E2C552EC250D600DE745B /* AuthenticationRepository.swift */; };
+		F4644AC72ED7757800CEF66A /* MoneyTransferRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4644AC62ED7756900CEF66A /* MoneyTransferRepository.swift */; };
 		F4986F322ECDE9F400F1F929 /* CustomAlertPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4986F312ECDE9EF00F1F929 /* CustomAlertPopupView.swift */; };
 		F4D2A94F2ECFA58F00AFB7B0 /* AuthenticationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D2A94E2ECFA4DD00AFB7B0 /* AuthenticationServiceTests.swift */; };
 		F4D824A52ED881F80038C44F /* CustomUsernameField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D824A42ED881E30038C44F /* CustomUsernameField.swift */; };
 		F4D9D3F72ECA9C3300C36C45 /* TransactionDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D9D3F62ECA9C3300C36C45 /* TransactionDetailsView.swift */; };
 		F4E9C0682ED5DF1900DC591D /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E9C0672ED5DF0E00DC591D /* KeychainService.swift */; };
-		F4E9C06A2ED5F7BB00DC591D /* AccountDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E9C0692ED5F7A600DC591D /* AccountDetailService.swift */; };
+		F4E9C06A2ED5F7BB00DC591D /* AccountDetailRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E9C0692ED5F7A600DC591D /* AccountDetailRepository.swift */; };
 		F4E9C06C2ED6FD5C00DC591D /* TransactionsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E9C06B2ED6FD5C00DC591D /* TransactionsList.swift */; };
 		F4E9C06F2ED707CF00DC591D /* TransactionDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E9C06E2ED707CA00DC591D /* TransactionDetailsViewModel.swift */; };
 		F4E9C0712ED734A800DC591D /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E9C0702ED7349B00DC591D /* Transaction.swift */; };
@@ -58,15 +58,15 @@
 		53D4189E2AC717890070ADB1 /* MoneyTransferViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyTransferViewModel.swift; sourceTree = "<group>"; };
 		53D418A02AC71B8F0070ADB1 /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 		F4107EC12ED8D84600146F16 /* Stub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stub.swift; sourceTree = "<group>"; };
-		F41E2C552EC250D600DE745B /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
+		F41E2C552EC250D600DE745B /* AuthenticationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationRepository.swift; sourceTree = "<group>"; };
 		F41E2C5D2EC256E600DE745B /* AuraTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AuraTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F4644AC62ED7756900CEF66A /* MoneyTransferService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyTransferService.swift; sourceTree = "<group>"; };
+		F4644AC62ED7756900CEF66A /* MoneyTransferRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyTransferRepository.swift; sourceTree = "<group>"; };
 		F4986F312ECDE9EF00F1F929 /* CustomAlertPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertPopupView.swift; sourceTree = "<group>"; };
 		F4D2A94E2ECFA4DD00AFB7B0 /* AuthenticationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationServiceTests.swift; sourceTree = "<group>"; };
 		F4D824A42ED881E30038C44F /* CustomUsernameField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUsernameField.swift; sourceTree = "<group>"; };
 		F4D9D3F62ECA9C3300C36C45 /* TransactionDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailsView.swift; sourceTree = "<group>"; };
 		F4E9C0672ED5DF0E00DC591D /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
-		F4E9C0692ED5F7A600DC591D /* AccountDetailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailService.swift; sourceTree = "<group>"; };
+		F4E9C0692ED5F7A600DC591D /* AccountDetailRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailRepository.swift; sourceTree = "<group>"; };
 		F4E9C06B2ED6FD5C00DC591D /* TransactionsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsList.swift; sourceTree = "<group>"; };
 		F4E9C06E2ED707CA00DC591D /* TransactionDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailsViewModel.swift; sourceTree = "<group>"; };
 		F4E9C0702ED7349B00DC591D /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
@@ -166,11 +166,11 @@
 		F41E2C532EC2508800DE745B /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				F4644AC62ED7756900CEF66A /* MoneyTransferService.swift */,
+				F4644AC62ED7756900CEF66A /* MoneyTransferRepository.swift */,
 				F4E9C0702ED7349B00DC591D /* Transaction.swift */,
-				F4E9C0692ED5F7A600DC591D /* AccountDetailService.swift */,
+				F4E9C0692ED5F7A600DC591D /* AccountDetailRepository.swift */,
 				F4E9C0672ED5DF0E00DC591D /* KeychainService.swift */,
-				F41E2C552EC250D600DE745B /* AuthenticationService.swift */,
+				F41E2C552EC250D600DE745B /* AuthenticationRepository.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -301,7 +301,7 @@
 				F4E9C06C2ED6FD5C00DC591D /* TransactionsList.swift in Sources */,
 				F4986F322ECDE9F400F1F929 /* CustomAlertPopupView.swift in Sources */,
 				53D4189B2AC711990070ADB1 /* AuthenticationViewModel.swift in Sources */,
-				F4644AC72ED7757800CEF66A /* MoneyTransferService.swift in Sources */,
+				F4644AC72ED7757800CEF66A /* MoneyTransferRepository.swift in Sources */,
 				53D4189D2AC715AA0070ADB1 /* AccountDetailViewModel.swift in Sources */,
 				53D418912AC70A920070ADB1 /* AuthenticationView.swift in Sources */,
 				F4E9C06F2ED707CF00DC591D /* TransactionDetailsViewModel.swift in Sources */,
@@ -309,10 +309,10 @@
 				53D418932AC70AB10070ADB1 /* AccountDetailView.swift in Sources */,
 				F4D9D3F72ECA9C3300C36C45 /* TransactionDetailsView.swift in Sources */,
 				53D4189F2AC717890070ADB1 /* MoneyTransferViewModel.swift in Sources */,
-				F41E2C562EC250D600DE745B /* AuthenticationService.swift in Sources */,
+				F41E2C562EC250D600DE745B /* AuthenticationRepository.swift in Sources */,
 				53D4188D2AC709F40070ADB1 /* AppViewModel.swift in Sources */,
 				F4E9C0682ED5DF1900DC591D /* KeychainService.swift in Sources */,
-				F4E9C06A2ED5F7BB00DC591D /* AccountDetailService.swift in Sources */,
+				F4E9C06A2ED5F7BB00DC591D /* AccountDetailRepository.swift in Sources */,
 				53D418A12AC71B8F0070ADB1 /* View+Extensions.swift in Sources */,
 				53D418992AC70FD80070ADB1 /* Color+Extensions.swift in Sources */,
 				F4D824A52ED881F80038C44F /* CustomUsernameField.swift in Sources */,

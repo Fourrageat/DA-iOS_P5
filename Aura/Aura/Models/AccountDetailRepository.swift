@@ -40,7 +40,7 @@ enum AccountServiceError: Error {
 // MARK: - Service
 
 /// Abstraction for fetching account details.
-protocol AccountDetailServicing {
+protocol AccountDetailRepositoryType {
     /// Fetches account details using the authentication token.
     /// - Parameter token: Authentication token to include in the header.
     /// - Throws: Errors related to networking or decoding.
@@ -49,7 +49,7 @@ protocol AccountDetailServicing {
 }
 
 
-struct AccountDetailService: AccountDetailServicing {
+struct AccountDetailRepository: AccountDetailRepositoryType {
     private let baseUrl: URL = {
         guard let base = ProcessInfo.processInfo.environment["AURA_BASE_URL"],
               let url = URL(string: base) else {
@@ -92,7 +92,7 @@ struct AccountDetailService: AccountDetailServicing {
 }
 
 #if DEBUG
-extension AccountDetailService {
+extension AccountDetailRepository {
     /// Example response stub for previews or tests.
     public static func previewStub() -> AccountDetailResponse {
         return AccountDetailResponse(

@@ -26,7 +26,7 @@ final class AuthenticationServiceTests: XCTestCase {
             return (response, data)
         }
 
-        let service = AuthenticationService()
+        let service = AuthenticationRepository()
         let token = try await service.authenticate(username: "user1", password: "pass1")
         XCTAssertEqual(token, "abc123")
     }
@@ -39,7 +39,7 @@ final class AuthenticationServiceTests: XCTestCase {
             return (response, data)
         }
 
-        let service = AuthenticationService()
+        let service = AuthenticationRepository()
         do {
             _ = try await service.authenticate(username: "user", password: "pass")
             XCTFail("Expected error not thrown")
@@ -58,7 +58,7 @@ final class AuthenticationServiceTests: XCTestCase {
             return (response, data)
         }
 
-        let service = AuthenticationService()
+        let service = AuthenticationRepository()
         do {
             _ = try await service.authenticate(username: "user", password: "pass")
             XCTFail("Expected error not thrown")
@@ -78,7 +78,7 @@ final class AuthenticationServiceTests: XCTestCase {
             return (response, data)
         }
 
-        let service = AuthenticationService()
+        let service = AuthenticationRepository()
         do {
             _ = try await service.authenticate(username: "user", password: "pass")
             XCTFail("Expected decoding error not thrown")

@@ -10,9 +10,9 @@ import Foundation
 class TransactionDetailsViewModel: ObservableObject {
     @Published var transactions: [Transaction] = []
     
-    var service: AccountDetailServicing
+    var service: AccountDetailRepositoryType
     
-    init(service: AccountDetailServicing = AccountDetailService()) {
+    init(service: AccountDetailRepositoryType = AccountDetailRepository()) {
         self.service = service
     }
     

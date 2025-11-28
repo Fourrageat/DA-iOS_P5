@@ -15,9 +15,9 @@ class AuthenticationViewModel: ObservableObject {
     @Published var password: String = ""
     
     var onLoginSucceed: (() -> Void)?
-    let service: AuthenticationServicing
+    let service: AuthenticationRepositoryType
     
-    init(service: AuthenticationServicing = AuthenticationService()) {
+    init(service: AuthenticationRepositoryType = AuthenticationRepository()) {
         self.service = service
     }
     

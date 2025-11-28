@@ -14,11 +14,11 @@ struct TransferRequest: Codable {
 }
 
 // MARK: - Service
-protocol MoneyTranfertServicing {
+protocol MoneyTranfertRepositoryType {
     func transfert(recipient: String, amount: Decimal, token: String) async throws -> Void
 }
 
-struct MoneyTranfertService: MoneyTranfertServicing {
+struct MoneyTranfertRepository: MoneyTranfertRepositoryType {
     private let baseUrl: URL = {
         guard let base = ProcessInfo.processInfo.environment["AURA_BASE_URL"],
               let url = URL(string: base) else {

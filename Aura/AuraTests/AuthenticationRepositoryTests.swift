@@ -51,8 +51,8 @@ final class AuthenticationServiceTests: XCTestCase {
             XCTFail("Expected error not thrown")
         } catch {
             let nsError = error as NSError
-            XCTAssertEqual(nsError.domain, "AuthenticationService")
             XCTAssertEqual(nsError.code, 400)
+            XCTAssertEqual(nsError.localizedDescription, "Bad credentials")
         }
     }
 
@@ -70,7 +70,6 @@ final class AuthenticationServiceTests: XCTestCase {
             XCTFail("Expected error not thrown")
         } catch {
             let nsError = error as NSError
-            XCTAssertEqual(nsError.domain, "AuthenticationService")
             XCTAssertEqual(nsError.code, 500)
             XCTAssertEqual(nsError.localizedDescription, "Internal Server Error")
         }

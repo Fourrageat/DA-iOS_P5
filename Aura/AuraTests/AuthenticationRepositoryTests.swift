@@ -1,3 +1,9 @@
+//
+//  AccountDetailRepositoryTests.swift
+//  Aura
+//
+//  Created by Baptiste Fourrageat on 28/11/2025.
+//
 
 import XCTest
 @testable import Aura

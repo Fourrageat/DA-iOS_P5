@@ -49,9 +49,8 @@ struct MoneyTransferRepository: MoneyTransferRepositoryType {
     func transfer(recipient: String, amount: Decimal, token: String) async throws -> Void {
         let url = baseURL.appendingPathComponent("/account/transfer")
         do {
-            let _: EmptyResponse = try await HTTP.request(
+            let _: EmptyResponse = try await HTTP.post(
                 url: url,
-                method: "POST",
                 headers: ["token": token],
                 body: TransferRequest(recipient: recipient, amount: amount)
             )

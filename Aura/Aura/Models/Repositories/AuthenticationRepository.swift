@@ -43,6 +43,8 @@ protocol AuthenticationRepositoryType {
     ///   - password: The user's password.
     /// - Returns: The access token (e.g., a JWT) to use for protected requests.
     /// - Throws: A network or decoding error if authentication fails.
+    ///
+    /// - Important: This method does not perform input validation. Ensure `recipient` and `amount` are validated by the caller.
     func authenticate(username: String, password: String) async throws -> String
 }
 
@@ -54,9 +56,8 @@ struct AuthenticationRepository: AuthenticationRepositoryType {
         let url = baseURL.appendingPathComponent("/auth")
 
         do {
-            let response: AuthResponse = try await HTTP.request(
+            let response: AuthResponse = try await HTTP.post(
                 url: url,
-                method: "POST",
                 headers: nil,
                 body: AuthRequest(username: username, password: password)
             )

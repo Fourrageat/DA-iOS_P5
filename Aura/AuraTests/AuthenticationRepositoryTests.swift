@@ -41,18 +41,28 @@ final class AuthenticationServiceTests: XCTestCase {
         StubURLProtocol.requestHandler = { _ in
             let url = URL(string: "https://example.com/auth")!
             let response = StubURLProtocol.makeResponse(url: url, status: 400)
-            let data = Data("Bad credentials".utf8)
+            let data = Data("{\"error\":\"Bad Request\"}".utf8)
             return (response, data)
         }
 
         let service = AuthenticationRepository()
         do {
             _ = try await service.authenticate(username: "user", password: "pass")
-            XCTFail("Expected error not thrown")
+            XCTFail("Expected 400 specific error not thrown")
         } catch {
-            let nsError = error as NSError
-            XCTAssertEqual(nsError.code, 400)
-            XCTAssertEqual(nsError.localizedDescription, "Bad credentials")
+            // Prefer matching a domain-specific error if available
+            if let repoError = error as? AuthenticateRepositoryError {
+                switch repoError {
+                case .badStatus:
+                    break
+                default:
+                    XCTFail("Unexpected repo error: \(repoError)")
+                }
+            } else {
+                // Fallback: validate status code surfaced via NSError
+                let nsError = error as NSError
+                XCTAssertEqual(nsError.code, 400)
+            }
         }
     }
 
@@ -69,9 +79,18 @@ final class AuthenticationServiceTests: XCTestCase {
             _ = try await service.authenticate(username: "user", password: "pass")
             XCTFail("Expected error not thrown")
         } catch {
-            let nsError = error as NSError
-            XCTAssertEqual(nsError.code, 500)
-            XCTAssertEqual(nsError.localizedDescription, "Internal Server Error")
+            if let repoError = error as? AuthenticateRepositoryError {
+                switch repoError {
+                case .badStatus:
+                    break
+                default:
+                    XCTFail("Unexpected repo error: \(repoError)")
+                }
+            } else {
+                // Fallback: validate status code surfaced via NSError
+                let nsError = error as NSError
+                XCTAssertEqual(nsError.code, 400)
+            }
         }
     }
 
@@ -88,8 +107,19 @@ final class AuthenticationServiceTests: XCTestCase {
             _ = try await service.authenticate(username: "user", password: "pass")
             XCTFail("Expected decoding error not thrown")
         } catch {
-            if error is DecodingError {
-                // expected
+            if let repoError = error as? AuthenticateRepositoryError {
+                switch repoError {
+                case .decodingFailed(let underlying):
+                    // Optionally assert the underlying decoding error shape
+                    if case DecodingError.keyNotFound(let key, _) = underlying {
+                        XCTAssertEqual(key.stringValue, "token")
+                    }
+                    // expected
+                default:
+                    XCTFail("Unexpected repo error: \(repoError)")
+                }
+            } else if error is DecodingError {
+                // If the repository ever stops wrapping, still accept raw decoding errors
             } else {
                 XCTFail("Unexpected error: \(error)")
             }

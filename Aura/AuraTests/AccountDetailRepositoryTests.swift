@@ -63,7 +63,7 @@ final class AccountDetailRepositoryTests: XCTestCase {
         do {
             _ = try await repo.getAccount(token: "tkn")
             XCTFail("Expected error not thrown")
-        } catch let error as AccountServiceError {
+        } catch let error as AccountRepositoryError {
             switch error {
             case .badStatus(let code):
                 XCTAssertEqual(code, 403)
@@ -88,7 +88,7 @@ final class AccountDetailRepositoryTests: XCTestCase {
         do {
             _ = try await repo.getAccount(token: "tkn")
             XCTFail("Expected decoding error not thrown")
-        } catch let error as AccountServiceError {
+        } catch let error as AccountRepositoryError {
             switch error {
             case .decodingFailed(let underlying):
                 XCTAssertTrue(underlying is DecodingError)

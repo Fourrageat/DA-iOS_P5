@@ -28,7 +28,7 @@ struct AccountDetailResponse: Codable {
 // MARK: - Service-specific Errors
 
 /// Possible errors when fetching account details.
-enum AccountServiceError: Error {
+enum AccountRepositoryError: Error {
     /// The constructed URL is invalid.
     case invalidURL
     /// The server responded with an invalid HTTP status code.
@@ -39,7 +39,6 @@ enum AccountServiceError: Error {
 
 // MARK: - Service
 
-/// Abstraction for fetching account details.
 protocol AccountDetailRepositoryType {
     /// Fetches account details using the authentication token.
     /// - Parameter token: Authentication token to include in the header.
@@ -48,15 +47,10 @@ protocol AccountDetailRepositoryType {
     func getAccount(token: String) async throws -> AccountDetailResponse
 }
 
-
 struct AccountDetailRepository: AccountDetailRepositoryType {
     
     private let baseURl: URL = HTTP.baseURL()
     
-    /// Fetches account details using the authentication token.
-    /// - Parameter token: Authentication token to include in the header.
-    /// - Throws: `AccountServiceError` in case of network or decoding issues.
-    /// - Returns: An `AccountDetailsResponse` instance containing account data.
     func getAccount(token: String) async throws -> AccountDetailResponse {
         let url = baseURl.appendingPathComponent("/account")
         do {
@@ -68,12 +62,15 @@ struct AccountDetailRepository: AccountDetailRepositoryType {
         } catch let httpError as HTTPError {
             switch httpError {
             case .badStatus(let code, _):
-                throw AccountServiceError.badStatus(code: code)
+                throw AccountRepositoryError.badStatus(code: code)
             case .decodingFailed(let underlying):
-                throw AccountServiceError.decodingFailed(underlying: underlying)
+                throw AccountRepositoryError.decodingFailed(underlying: underlying)
+            case .invalidURL:
+                throw AccountRepositoryError.invalidURL
             default:
                 throw httpError
             }
         }
     }
 }
+

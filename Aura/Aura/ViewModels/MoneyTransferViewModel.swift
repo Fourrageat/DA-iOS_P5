@@ -21,12 +21,12 @@ class MoneyTransferViewModel: ObservableObject {
     @Published var icon: String = ""
 
     // Repository abstraction that performs the transfer request
-    var service: MoneyTransferRepositoryType = MoneyTransferRepository()
+    var repository: MoneyTransferRepositoryType = MoneyTransferRepository()
     
     /// Creates a new money transfer view model.
-    /// - Parameter service: Repository used to perform transfer requests. Defaults to a concrete implementation.
-    init(service: MoneyTransferRepositoryType = MoneyTransferRepository()) {
-        self.service = service
+    /// - Parameter repository: Repository used to perform transfer requests. Defaults to a concrete implementation.
+    init(repository: MoneyTransferRepositoryType = MoneyTransferRepository()) {
+        self.repository = repository
     }
     
     /// Validates input, performs the transfer via the repository, and updates the UI state.
@@ -48,7 +48,7 @@ class MoneyTransferViewModel: ObservableObject {
             // Basic input validation before performing the transfer
             if !recipient.isEmpty && !amount.isEmpty {
                 // Execute the transfer request
-                try await service.transfer(recipient: recipient, amount: value, token: token)
+                try await repository.transfer(recipient: recipient, amount: value, token: token)
             }
             
             // Update UI to reflect success

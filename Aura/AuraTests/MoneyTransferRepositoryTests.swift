@@ -1,5 +1,5 @@
 //
-//  AccountDetailRepositoryTests.swift
+//  MoneyTransferRepositoryTests.swift
 //  Aura
 //
 //  Created by Baptiste Fourrageat on 28/11/2025.

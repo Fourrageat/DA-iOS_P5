@@ -23,12 +23,12 @@ class AuthenticationViewModel: ObservableObject {
     var onLoginSucceed: (() -> Void)?
     
     // Repository abstraction used to perform authentication requests
-    let service: AuthenticationRepositoryType
+    let repository: AuthenticationRepositoryType
     
     /// Creates a new authentication view model.
-    /// - Parameter service: Repository used to authenticate users. Defaults to a concrete implementation.
-    init(service: AuthenticationRepositoryType = AuthenticationRepository()) {
-        self.service = service
+    /// - Parameter repository: Repository used to authenticate users. Defaults to a concrete implementation.
+    init(repository: AuthenticationRepositoryType = AuthenticationRepository()) {
+        self.repository = repository
     }
     
     /// Attempts to authenticate the user with the provided credentials.
@@ -39,7 +39,7 @@ class AuthenticationViewModel: ObservableObject {
         
         // Perform authentication via the repository
         do {
-            let response = try await service.authenticate(username: username, password: password)
+            let response = try await repository.authenticate(username: username, password: password)
             // Notify listeners of successful authentication
             onLoginSucceed?()
             // Store token in Keychain. Retrieve later with: `let token = try? Keychain.get("auth_token")`

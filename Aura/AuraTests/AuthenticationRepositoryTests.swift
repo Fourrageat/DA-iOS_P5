@@ -1,5 +1,5 @@
 //
-//  AccountDetailRepositoryTests.swift
+//  AuthenticationRepositoryTests.swift
 //  Aura
 //
 //  Created by Baptiste Fourrageat on 28/11/2025.
@@ -10,7 +10,7 @@ import XCTest
 
 /// Tests for `AuthenticationRepository` covering success, HTTP error handling, and decoding failures.
 /// Uses `StubURLProtocol` to intercept network calls and return controlled responses.
-final class AuthenticationServiceTests: XCTestCase {
+final class AuthenticationRepositoryTests: XCTestCase {
     // Register the stub protocol and set a base URL for tests
     override func setUp() {
         super.setUp()

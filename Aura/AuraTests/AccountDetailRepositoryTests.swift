@@ -8,7 +8,7 @@
 import XCTest
 @testable import Aura
 
-/// Tests for `AccountDetailRepository` covering success, HTTP error mapping, decoding failures, and base URL handling.
+/// Tests for `AccountDetailRepository` covering success, HTTP error mapping, decoding failures.
 /// Uses `StubURLProtocol` to intercept requests and return controlled responses.
 final class AccountDetailRepositoryTests: XCTestCase {
     // Register the stub protocol and set a deterministic base URL for tests

@@ -16,12 +16,12 @@ class AccountDetailViewModel: ObservableObject {
     @Published var recentTransactions: [Transaction] = []
     
     // Repository abstraction used to retrieve account information
-    var service: AccountDetailRepositoryType
+    var repository: AccountDetailRepositoryType
     
     /// Creates a new account detail view model.
-    /// - Parameter service: Repository used to retrieve account information. Defaults to a concrete implementation.
-    init(service: AccountDetailRepositoryType = AccountDetailRepository()) {
-        self.service = service
+    /// - Parameter repository: Repository used to retrieve account information. Defaults to a concrete implementation.
+    init(repository: AccountDetailRepositoryType = AccountDetailRepository()) {
+        self.repository = repository
     }
     
     /// Fetches account data and updates the published properties.
@@ -35,7 +35,7 @@ class AccountDetailViewModel: ObservableObject {
                 return
             }
             // Fetch account details from the repository
-            let response = try await service.getAccount(token: token)
+            let response = try await repository.getAccount(token: token)
             totalAmount = "€\(response.currentBalance)"
             // Map repository transactions to lightweight UI models (only the most recent 3)
             recentTransactions = response.transactions.prefix(3).map { transaction in

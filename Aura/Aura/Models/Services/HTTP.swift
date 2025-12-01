@@ -7,13 +7,6 @@
 
 import Foundation
 
-enum HTTPError: Error {
-    case invalidURL
-    case badStatus(code: Int, message: String?)
-    case decodingFailed(underlying: Error)
-    case unknown
-}
-
 private struct EmptyBody: Encodable {}
 
 struct EmptyResponse: Decodable {}

@@ -33,7 +33,7 @@
 		F4E9C06A2ED5F7BB00DC591D /* AccountDetailRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E9C0692ED5F7A600DC591D /* AccountDetailRepository.swift */; };
 		F4E9C06C2ED6FD5C00DC591D /* TransactionsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E9C06B2ED6FD5C00DC591D /* TransactionsList.swift */; };
 		F4E9C06F2ED707CF00DC591D /* TransactionDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E9C06E2ED707CA00DC591D /* TransactionDetailsViewModel.swift */; };
-		F4E9C0712ED734A800DC591D /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E9C0702ED7349B00DC591D /* Transaction.swift */; };
+		F4E9C0712ED734A800DC591D /* shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E9C0702ED7349B00DC591D /* shared.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,7 +75,7 @@
 		F4E9C0692ED5F7A600DC591D /* AccountDetailRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailRepository.swift; sourceTree = "<group>"; };
 		F4E9C06B2ED6FD5C00DC591D /* TransactionsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsList.swift; sourceTree = "<group>"; };
 		F4E9C06E2ED707CA00DC591D /* TransactionDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailsViewModel.swift; sourceTree = "<group>"; };
-		F4E9C0702ED7349B00DC591D /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
+		F4E9C0702ED7349B00DC591D /* shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shared.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -199,7 +199,7 @@
 		F4692BED2ED9E32D0082B858 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				F4E9C0702ED7349B00DC591D /* Transaction.swift */,
+				F4E9C0702ED7349B00DC591D /* shared.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -355,7 +355,7 @@
 				53D418912AC70A920070ADB1 /* AuthenticationView.swift in Sources */,
 				F4E9C06F2ED707CF00DC591D /* TransactionDetailsViewModel.swift in Sources */,
 				F4692BEB2ED9D9880082B858 /* HTTP.swift in Sources */,
-				F4E9C0712ED734A800DC591D /* Transaction.swift in Sources */,
+				F4E9C0712ED734A800DC591D /* shared.swift in Sources */,
 				53D418932AC70AB10070ADB1 /* AccountDetailView.swift in Sources */,
 				F4D9D3F72ECA9C3300C36C45 /* TransactionDetailsView.swift in Sources */,
 				53D4189F2AC717890070ADB1 /* MoneyTransferViewModel.swift in Sources */,

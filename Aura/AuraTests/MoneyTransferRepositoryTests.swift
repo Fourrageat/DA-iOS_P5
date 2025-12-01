@@ -8,20 +8,26 @@
 import XCTest
 @testable import Aura
 
+/// Tests for `MoneyTransferRepository` covering success, HTTP error handling, and decoding failures.
+/// Uses `StubURLProtocol` to intercept requests and return controlled responses.
 final class MoneyTransferRepositoryTests: XCTestCase {
+    // Register the stub protocol and set a deterministic base URL for tests
     override func setUp() {
         super.setUp()
         URLProtocol.registerClass(StubURLProtocol.self)
         setenv("AURA_BASE_URL", "https://example.com", 1)
     }
 
+    // Unregister the stub protocol and reset shared state
     override func tearDown() {
         URLProtocol.unregisterClass(StubURLProtocol.self)
         StubURLProtocol.reset()
         super.tearDown()
     }
     
+    /// Verifies that a successful POST returns 200 and the repository completes without throwing.
     func testPostMoneySuccess() async {
+        // Stub a 200 OK for the transfer endpoint and verify request shape
         var handlerCalled = false
         StubURLProtocol.requestHandler = { request in
             handlerCalled = true
@@ -34,6 +40,7 @@ final class MoneyTransferRepositoryTests: XCTestCase {
             return (response, Data())
         }
         
+        // Execute the transfer via the repository
         let repository = MoneyTransferRepository()
 
         do {
@@ -50,7 +57,9 @@ final class MoneyTransferRepositoryTests: XCTestCase {
         XCTAssertTrue(handlerCalled, "Request handler should have been called")
     }
     
+    /// Verifies that a 400 response results in an error being thrown by the repository.
     func testPostMoneyFailure() async {
+        // Stub a 400 Bad Request with a JSON error body
         var handlerCalled = false
         StubURLProtocol.requestHandler = { request in
             handlerCalled = true
@@ -66,6 +75,7 @@ final class MoneyTransferRepositoryTests: XCTestCase {
 
         let repository = MoneyTransferRepository()
 
+        // Perform the call and assert it throws
         do {
             try await repository.transfer(
                 recipient: "toto",
@@ -81,7 +91,9 @@ final class MoneyTransferRepositoryTests: XCTestCase {
         XCTAssertTrue(handlerCalled, "Request handler should have been called")
     }
     
+    /// Verifies that an invalid response body surfaces as a decoding error.
     func testPostMoneyDecodingFailed() async {
+        // Stub a 200 OK with a non-JSON body to trigger decoding failure
         var handlerCalled = false
         StubURLProtocol.requestHandler = { request in
             handlerCalled = true
@@ -110,3 +122,4 @@ final class MoneyTransferRepositoryTests: XCTestCase {
         XCTAssertTrue(handlerCalled, "Request handler should have been called")
     }
 }
+

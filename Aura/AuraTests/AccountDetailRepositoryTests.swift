@@ -8,20 +8,26 @@
 import XCTest
 @testable import Aura
 
+/// Tests for `AccountDetailRepository` covering success, HTTP error mapping, decoding failures, and base URL handling.
+/// Uses `StubURLProtocol` to intercept requests and return controlled responses.
 final class AccountDetailRepositoryTests: XCTestCase {
+    // Register the stub protocol and set a deterministic base URL for tests
     override func setUp() {
         super.setUp()
         URLProtocol.registerClass(StubURLProtocol.self)
         setenv("AURA_BASE_URL", "https://example.com", 1)
     }
 
+    // Unregister the stub protocol and reset any shared state
     override func tearDown() {
         URLProtocol.unregisterClass(StubURLProtocol.self)
         StubURLProtocol.reset()
         super.tearDown()
     }
     
+    /// Verifies that a successful response is decoded into account details and transactions.
     func testGetAccountSuccess() async throws {
+        // Stub a 200 OK with a valid JSON payload
         StubURLProtocol.requestHandler = { request in
             XCTAssertEqual(request.httpMethod, "GET")
             XCTAssertEqual(request.url?.path, "/account")
@@ -41,6 +47,7 @@ final class AccountDetailRepositoryTests: XCTestCase {
             return (response, json)
         }
 
+        // Execute the request via the repository
         let repo = AccountDetailRepository()
         let details = try await repo.getAccount(token: "tkn-123")
         XCTAssertEqual(details.currentBalance, 1234.56, accuracy: 0.0001)
@@ -51,7 +58,9 @@ final class AccountDetailRepositoryTests: XCTestCase {
         XCTAssertEqual(details.transactions[1].label, "Salary")
     }
 
+    /// Verifies that non-2xx responses are mapped to a domain-specific error with the status code.
     func testGetAccountMapsBadStatusToServiceError() async {
+        // Stub a 403 Forbidden response
         StubURLProtocol.requestHandler = { _ in
             let url = URL(string: "https://example.com/account")!
             let response = StubURLProtocol.makeResponse(url: url, status: 403)
@@ -59,6 +68,7 @@ final class AccountDetailRepositoryTests: XCTestCase {
             return (response, data)
         }
 
+        // Perform the call and assert that an error is thrown
         let repo = AccountDetailRepository()
         do {
             _ = try await repo.getAccount(token: "tkn")
@@ -75,7 +85,9 @@ final class AccountDetailRepositoryTests: XCTestCase {
         }
     }
 
+    /// Verifies that malformed JSON is surfaced as a decoding error wrapped by the repository.
     func testGetAccountDecodingFailureIsMapped() async {
+        // Stub a 200 OK with invalid JSON for the expected schema
         StubURLProtocol.requestHandler = { _ in
             let url = URL(string: "https://example.com/account")!
             let response = StubURLProtocol.makeResponse(url: url, status: 200)
@@ -100,8 +112,9 @@ final class AccountDetailRepositoryTests: XCTestCase {
         }
     }
 
+    /// Verifies that the repository constructs the base URL from the AURA_BASE_URL environment variable.
     func testBaseURLIsReadFromEnv() async throws {
-        // Ensure the URL is constructed from AURA_BASE_URL by observing the requested URL
+        // Stub a minimal successful response and assert the requested URL matches the env var
         StubURLProtocol.requestHandler = { request in
             XCTAssertEqual(request.url?.absoluteString, "https://example.com/account")
             let url = URL(string: "https://example.com/account")!
